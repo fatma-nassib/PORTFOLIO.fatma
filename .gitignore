@@ -1,0 +1,23 @@
+# Compiled output
+/dist
+/out-tsc
+/node_modules
+/.angular
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+
+# IDEs
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+/coverage
+
+# Local env
+.env

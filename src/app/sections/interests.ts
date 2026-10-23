@@ -1,0 +1,32 @@
+import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+
+import { INTERESTS } from '../data/portfolio.data';
+import { SectionHeading } from '../shared/section-heading';
+
+@Component({
+  selector: 'app-interests',
+  imports: [SectionHeading],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <section id="interests" class="mx-auto max-w-6xl scroll-mt-24 px-6 py-20 lg:px-10">
+      <app-section-heading text="Interests" />
+      <ul class="flex flex-wrap gap-3">
+        @for (interest of interests; track interest) {
+          <li>
+            <button
+              type="button"
+              (click)="interestClicked.emit(interest)"
+              class="rounded-full border border-neon/60 bg-white/5 px-5 py-2.5 text-sm text-zinc-200 transition hover:scale-105 hover:border-neon hover:bg-neon/10 hover:text-neon"
+            >
+              {{ interest }}
+            </button>
+          </li>
+        }
+      </ul>
+    </section>
+  `,
+})
+export class Interests {
+  protected readonly interests = INTERESTS;
+  readonly interestClicked = output<string>();
+}

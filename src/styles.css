@@ -1,0 +1,94 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Sora', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Neutral surface scale */
+  --color-ink: #0a0f1a;
+  --color-ink-soft: #0f1727;
+  --color-slate-deep: #16233a;
+
+  /* Accents — cyan primary, magenta secondary (used together for gradients) */
+  --color-neon: #00f7ff;
+  --color-magenta: #ff00ff;
+  --color-accent: #4f8cff;
+  --color-accent-soft: #8fb4ff;
+
+  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 18px 40px -24px rgb(0 0 0 / 0.7);
+}
+
+@layer base {
+  html {
+    /* Clipping x-scroll on html keeps body out of the scroll-container role,
+       so 100vh sections still fit inside the viewport. */
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply font-sans leading-relaxed text-slate-300 antialiased;
+    background: var(--color-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-white;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    color: #fff;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+
+  /* Prevent the fixed header from covering anchor targets. */
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-6 lg:px-10;
+  }
+
+  .card {
+    @apply rounded-xl border border-white/10 bg-white/[0.03];
+    box-shadow: var(--shadow-card);
+  }
+
+  .pill {
+    @apply inline-flex items-center rounded-full border border-white/12 bg-white/[0.04] px-3 py-1 text-xs font-medium text-slate-300;
+  }
+}
+
+@utility text-gradient {
+  @apply bg-linear-to-r from-white via-white to-accent-soft bg-clip-text text-transparent;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
