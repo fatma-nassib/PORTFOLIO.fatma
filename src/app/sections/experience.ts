@@ -13,15 +13,15 @@ import { SectionHeading } from '../shared/section-heading';
 
       <ol class="relative ml-3 border-l border-line">
         @for (job of experience; track job.role + job.company) {
-          <li class="relative ml-6 pb-10 last:pb-0">
+          <li class="group relative ml-6 pb-10 last:pb-0">
             <span
               class="absolute -left-[2.05rem] top-1.5 h-3 w-3 rounded-full border-2 border-fg"
-              [class]="job.current ? 'bg-accent shadow-[0_0_12px_rgba(0,247,255,0.8)]' : 'bg-muted-soft'"
+              [class]="job.current ? 'bg-accent' : 'bg-muted-soft'"
               aria-hidden="true"
             ></span>
 
             <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-              <h3 class="text-base font-semibold text-fg">{{ job.role }}</h3>
+              <h3 class="text-base font-semibold text-fg transition-colors group-hover:text-accent">{{ job.role }}</h3>
               <p class="font-mono text-xs text-muted-soft">{{ job.period }}</p>
             </div>
             <p class="mt-0.5 text-sm text-accent">{{ job.company }}</p>
@@ -29,7 +29,7 @@ import { SectionHeading } from '../shared/section-heading';
 
             <ul class="mt-3 flex flex-col gap-1.5 pl-4 text-sm text-muted">
               @for (highlight of job.highlights; track highlight) {
-                <li>{{ highlight }}</li>
+                <li class="transition-colors hover:text-accent">{{ highlight }}</li>
               }
             </ul>
           </li>

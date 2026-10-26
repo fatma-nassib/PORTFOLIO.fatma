@@ -17,7 +17,7 @@ import { SectionHeading } from '../shared/section-heading';
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         @for (cert of certifications; track cert.name) {
           <article
-            class="flex flex-col rounded-2xl border border-accent/40 bg-surface/5 p-6 transition hover:-translate-y-1.5 hover:border-accent hover:shadow-[0_0_25px_rgba(255,0,255,0.18)]"
+            class="flex flex-col rounded-2xl border border-line bg-surface/5 p-6 transition-colors hover:border-accent"
           >
             <h3 class="text-base font-semibold leading-snug text-fg">{{ cert.name }}</h3>
             <p class="mt-2 text-sm text-muted">{{ cert.issuer }}</p>

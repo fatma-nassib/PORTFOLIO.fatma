@@ -4,9 +4,8 @@ import { Icon } from './icon';
 import { ThemeService } from './theme.service';
 
 /**
- * Icon-only theme switch. `styled` selects the chrome it sits in: the fixed
- * cream top bar (`true`) or the dark sidebar (`false`, where the original
- * glass styling is kept).
+ * Icon-only theme switch. `styled` selects the fixed top-bar or side-rail
+ * button treatment.
  */
 @Component({
   selector: 'app-theme-toggle',
@@ -22,7 +21,7 @@ import { ThemeService } from './theme.service';
       [class]="
         styled()
           ? 'grid h-11 w-11 place-items-center rounded-[20px] border border-current transition hover:opacity-70'
-          : 'grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-zinc-200 transition hover:border-neon hover:text-neon'
+          : 'grid h-9 w-9 place-items-center rounded-lg border border-line text-fg transition hover:border-accent hover:text-accent'
       "
     >
       <app-icon [name]="themes.isDark() ? 'sun' : 'moon'" sizeClass="h-5 w-5" />

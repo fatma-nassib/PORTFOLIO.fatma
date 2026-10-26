@@ -13,7 +13,6 @@ import { DOCUMENT } from '@angular/common';
 
 import { HERO, IMAGES, NAV_ITEMS, PROFILE } from '../data/portfolio.data';
 import { Icon } from '../shared/icon';
-import { LottiePlayer } from '../shared/lottie-player';
 
 /**
  * Hero unified design.
@@ -25,7 +24,7 @@ import { LottiePlayer } from '../shared/lottie-player';
  */
 @Component({
   selector: 'app-hero',
-  imports: [Icon, LottiePlayer],
+  imports: [Icon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section
@@ -42,7 +41,7 @@ import { LottiePlayer } from '../shared/lottie-player';
               [src]="images.meadow"
               alt=""
               aria-hidden="true"
-              class="meadow-drift h-full w-full object-cover"
+              class="h-full w-full object-cover"
               fetchpriority="high"
             />
           </div>
@@ -74,19 +73,13 @@ import { LottiePlayer } from '../shared/lottie-player';
               {{ hero.roles }}
             </p>
 
-            <app-lottie-player
-              animationUrl="https://assets9.lottiefiles.com/packages/lf20_jbrw3hcz.json"
-              containerClass="h-16 w-16 md:h-20 md:w-20"
-              [loop]="true"
-              [autoplay]="true"
-            />
-
             <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <div class="max-w-xl">
                 <p class="max-w-lg text-caption leading-snug text-fg/90 md:text-body">{{ hero.bio }}</p>
                 <div class="mt-5 flex flex-wrap gap-3 md:mt-6">
                   <a href="#about" class="btn btn-cream px-5 py-3 text-caption md:text-body">
                     See the work
+                    <app-icon name="arrow-down" sizeClass="h-4 w-4" />
                   </a>
                   <button
                     type="button"
@@ -96,12 +89,13 @@ import { LottiePlayer } from '../shared/lottie-player';
                     [title]="hasCv ? 'Download my CV' : 'CV coming soon'"
                   >
                     Download CV
+                    <app-icon name="download" sizeClass="h-4 w-4" />
                   </button>
                 </div>
               </div>
 
               <p class="eyebrow flex items-center gap-2 text-fg/80 md:pb-2">
-                <span class="cue-bob inline-block" aria-hidden="true"></span>
+                <span class="inline-block h-1.5 w-1.5 rounded-full bg-fg/70" aria-hidden="true"></span>
                 Scroll
               </p>
             </div>

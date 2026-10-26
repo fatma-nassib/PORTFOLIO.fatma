@@ -11,13 +11,14 @@ import {
   type Project,
   type ProjectCategory,
 } from '../data/portfolio.data';
+import { Icon } from '../shared/icon';
 import { SectionHeading } from '../shared/section-heading';
 
 type ProjectFilter = ProjectCategory | 'all';
 
 @Component({
   selector: 'app-projects',
-  imports: [SectionHeading],
+  imports: [Icon, SectionHeading],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section id="projects" class="mx-auto max-w-6xl scroll-mt-24 px-6 py-20 lg:px-10">
@@ -33,8 +34,8 @@ type ProjectFilter = ProjectCategory | 'all';
             class="rounded-md border px-4 py-2 text-sm transition"
             [class]="
               activeFilter() === filter.value
-                ? 'border-neon bg-neon text-ink font-semibold'
-                : 'border-neon/60 text-neon hover:bg-neon/10'
+                ? 'border-accent bg-accent text-canvas font-semibold'
+                : 'border-line text-fg/80 hover:border-accent hover:text-accent'
             "
           >
             {{ filter.label }}
@@ -45,7 +46,7 @@ type ProjectFilter = ProjectCategory | 'all';
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         @for (project of visibleProjects(); track project.title) {
           <article
-            class="group relative flex flex-col rounded-2xl border border-line bg-surface p-6 transition hover:-translate-y-1.5 hover:border-accent/60 hover:shadow-[0_0_30px_rgba(0,247,255,0.15)]"
+            class="group relative flex flex-col rounded-2xl border border-line bg-surface p-6 transition-colors hover:border-accent/60"
           >
             <div class="flex items-start justify-between gap-3">
               <div>
@@ -78,6 +79,7 @@ type ProjectFilter = ProjectCategory | 'all';
                   class="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition hover:underline"
                 >
                   {{ project.linkLabel }}
+                  <app-icon name="link" sizeClass="h-4 w-4" />
                   <span class="sr-only">(opens in a new tab)</span>
                 </a>
               } @else {
@@ -105,7 +107,12 @@ export class Projects {
     const filter = this.activeFilter();
     return filter === 'all'
       ? PROJECTS
-      : PROJECTS.filter((project) => project.category === filter);
+      : PROJECTS.filter((project) => {
+          const categories = Array.isArray(project.category)
+            ? project.category
+            : [project.category];
+          return categories.includes(filter);
+        });
   });
 
   protected categoryLabel(category: ProjectCategory): string {

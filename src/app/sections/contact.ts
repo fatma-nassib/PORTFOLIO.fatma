@@ -79,7 +79,7 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
         <button
           type="submit"
           [disabled]="status() === 'sending'"
-          class="self-center rounded-full bg-gradient-to-r from-accent to-magenta px-8 py-3 text-sm font-semibold text-fg shadow-lg shadow-card transition hover:-translate-y-0.5 hover:shadow-card disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+          class="btn btn-filled self-center rounded-full px-8 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
         >
           {{ status() === 'sending' ? 'Sending…' : 'Send Message' }}
         </button>
@@ -112,7 +112,7 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
             [attr.aria-label]="link.title"
             [attr.target]="link.href.startsWith('http') ? '_blank' : null"
             [attr.rel]="link.href.startsWith('http') ? 'noopener noreferrer' : null"
-            class="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-accent to-magenta text-fg transition hover:scale-110 hover:shadow-[0_0_20px_rgba(0,247,255,0.5)]"
+            class="grid h-12 w-12 place-items-center rounded-full border border-line text-fg transition-colors hover:border-accent hover:text-accent"
           >
             <app-icon [name]="link.icon" />
           </a>

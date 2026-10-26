@@ -41,7 +41,7 @@ export type Project = {
   readonly subtitle: string;
   readonly description: string;
   readonly stack: readonly string[];
-  readonly category: ProjectCategory;
+  readonly category: ProjectCategory | readonly ProjectCategory[];
   readonly url?: string;
   readonly linkLabel: string;
   readonly featured?: boolean;
@@ -263,7 +263,7 @@ export const PROJECTS: readonly Project[] = [
     description:
       'A ride-sharing platform for Tanzanian commuters built around the D5 regulatory framework: a service-oriented backend of seven microservices, a Flutter mobile app and a Next.js admin dashboard.',
     stack: ['TypeScript', 'Node.js', 'Fastify', 'PostgreSQL', 'PostGIS', 'Redis', 'Kafka', 'Docker'],
-    category: 'systems',
+    category: ['systems', 'mobile'],
     url: 'https://github.com/godblesskaaya/rishfy',
     linkLabel: 'View on GitHub',
     featured: true,

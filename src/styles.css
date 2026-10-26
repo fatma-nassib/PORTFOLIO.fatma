@@ -1,19 +1,14 @@
 @import 'tailwindcss';
 
 /* ------------------------------------------------------------------
-   Palette tokens.
-
-   Cream (Zipline) is the default. Dark (the original neon theme) is
-   reached with `data-theme="dark"` on <html>. Every component style is
-   written against the semantic tokens below, never a raw hex, so a
-   theme swap is a variable swap.
+   Palette tokens. Both themes share a restrained editorial palette.
    ------------------------------------------------------------------ */
 :root {
   --cream: #f7f4e8;
   --cream-deep: #efebdc;
-  --ink: #000;
+  --ink: #171713;
   --stone: #c6c3ba;
-  --violet: #643aed;
+  --accent: #8a5d3b;
   --muted: rgb(0 0 0 / 0.6);
   --muted-soft: rgb(0 0 0 / 0.35);
   --line: rgb(0 0 0 / 0.2);
@@ -22,16 +17,16 @@
 }
 
 [data-theme='dark'] {
-  --cream: #0a0f1a;
-  --cream-deep: #0f1727;
-  --ink: #f8fafc;
-  --stone: #1e2b42;
-  --violet: #00f7ff;
-  --muted: #a1a1aa;
-  --muted-soft: #52525b;
+  --cream: #171713;
+  --cream-deep: #211f1a;
+  --ink: #f5f1e8;
+  --stone: #39352d;
+  --accent: #c5a47a;
+  --muted: #c2bdb2;
+  --muted-soft: #918a7e;
   --line: rgb(255 255 255 / 0.1);
   --line-strong: rgb(255 255 255 / 0.18);
-  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 18px 40px -24px rgb(0 0 0 / 0.7);
+  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 18px 40px -24px rgb(0 0 0 / 0.45);
 }
 
 @theme {
@@ -43,25 +38,24 @@
   --color-muted-soft: var(--muted-soft);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
-  --color-accent: var(--violet);
+  --color-accent: var(--accent);
 
   /* Original palette names kept for the restored sections. */
   --color-meadow-cream: var(--cream);
   --color-hillside-ink: var(--ink);
   --color-stone-border: var(--stone);
-  --color-drone-violet: var(--violet);
+  --color-drone-violet: var(--accent);
   --color-ink: #0a0f1a;
   --color-ink-soft: #0f1727;
   --color-slate-deep: #16233a;
-  --color-neon: #00f7ff;
-  --color-magenta: #ff00ff;
-  --color-accent-soft: #8fb4ff;
+  --color-magenta: #b58269;
+  --color-accent-soft: #c5a47a;
 
   /* Type */
-  --font-grotesk: 'Archivo', 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-screamer: 'Archivo Black', 'Anton', 'Arial Black', ui-sans-serif, system-ui, sans-serif;
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Sora', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-grotesk: 'Manrope', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-screamer: 'DM Serif Display', Georgia, serif;
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'DM Serif Display', Georgia, serif;
 
   --text-caption: 14px;
   --text-body: 16px;
@@ -90,22 +84,16 @@
     letter-spacing: -0.16px;
   }
 
-  /*
-    Cream voice: stamped, condensed, always uppercase.
-    Dark voice: the original soft display face, sentence case.
-    Both are plain element selectors inside the base layer so they carry the
-    same specificity as any component selector; the cream body scopes the
-    first rule so it can never leak into the dark theme.
-  */
+  /* Keep display type consistent between themes. */
   html:not([data-theme='dark']) h1,
   html:not([data-theme='dark']) h2,
   html:not([data-theme='dark']) h3,
   html:not([data-theme='dark']) h4 {
     font-family: var(--font-screamer);
-    font-weight: 700;
-    line-height: 0.85;
-    letter-spacing: 0;
-    text-transform: uppercase;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    text-transform: none;
     color: var(--color-fg);
     text-wrap: balance;
   }
@@ -115,9 +103,9 @@
   html[data-theme='dark'] h3,
   html[data-theme='dark'] h4 {
     font-family: var(--font-display);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.025em;
     text-transform: none;
     color: #fff;
   }
@@ -167,10 +155,10 @@
 
   .screamer {
     @apply font-screamer;
-    font-weight: 700;
-    line-height: 0.85;
-    letter-spacing: 0;
-    text-transform: uppercase;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    text-transform: none;
     color: inherit;
   }
 
@@ -280,12 +268,9 @@
     color: var(--color-fg);
   }
 
-  /* Dark landing panel: ink base with the original neon glow. */
+  /* Dark landing panel keeps the same warm palette as the rest of the site. */
   .dark-hero {
-    background:
-      radial-gradient(60% 40% at 25% 0%, rgb(0 247 255 / 0.08), transparent 70%),
-      radial-gradient(50% 40% at 80% 100%, rgb(255 0 255 / 0.07), transparent 70%),
-      var(--color-ink);
+    background: var(--color-canvas);
   }
 
   /* Ghost button that sits on the hero photograph. */
@@ -339,7 +324,7 @@
     object-position: center 28%;
   }
 
-  /* ---------------- Dark (original neon) system ---------------- */
+  /* ---------------- Dark theme system ---------------- */
 
   .container-page {
     @apply mx-auto w-full max-w-6xl px-6 lg:px-10;
@@ -367,10 +352,8 @@
   .side-rail {
     border-radius: 1rem;
     border: 1px solid rgb(255 255 255 / 0.1);
-    background: rgb(0 0 0 / 0.5);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 0 20px rgb(0 255 255 / 0.2);
-    color: #e4e4e7;
+    background: var(--color-canvas);
+    color: var(--color-fg);
   }
 
   @media (width >=768px) {
@@ -389,9 +372,9 @@
   }
 
   .side-avatar {
-    border: 2px solid var(--color-neon);
-    background: var(--color-slate-deep);
-    color: var(--color-neon);
+    border: 2px solid var(--color-accent);
+    background: var(--color-canvas);
+    color: var(--color-accent);
     transition: transform 200ms ease;
   }
 
@@ -412,17 +395,17 @@
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.025em;
-    color: #d4d4d8;
+    color: var(--color-muted);
     transition: color 150ms ease, transform 150ms ease;
   }
 
   .side-link:hover {
-    color: var(--color-neon);
-    transform: translateX(4px);
+    color: var(--color-accent);
+    transform: translateX(2px);
   }
 
   .side-link.is-active {
-    color: var(--color-neon);
+    color: var(--color-accent);
   }
 
   /* Cream theme: the toggle button on the light rail reads in ink. */
@@ -446,7 +429,7 @@
 
   .side-menu-button {
     border: 1px solid var(--color-line-strong);
-    color: #e4e4e7;
+    color: var(--color-fg);
   }
 
   html[data-theme='light'] .side-menu-button {
@@ -462,7 +445,7 @@
   }
 
   .side-mobile-link {
-    color: #d4d4d8;
+    color: var(--color-muted);
   }
 
   .side-mobile-link:hover {
@@ -470,7 +453,7 @@
   }
 
   .side-mobile-link.is-active {
-    color: var(--color-neon);
+    color: var(--color-accent);
   }
 
   html[data-theme='light'] .side-mobile-link {
@@ -483,47 +466,5 @@
 
   html[data-theme='light'] .side-mobile-link.is-active {
     color: var(--color-fg);
-  }
-}
-
-/* Hero photo drift: a slow pan reads as the landscape moving past. */
-@keyframes meadow-drift {
-  0% {
-    transform: scale(1.08) translate3d(-1.2%, 0, 0);
-  }
-
-  100% {
-    transform: scale(1.14) translate3d(1.2%, -1%, 0);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .meadow-drift {
-    animation: meadow-drift 26s ease-in-out infinite alternate;
-    will-change: transform;
-  }
-}
-
-@keyframes cue-bob {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(6px);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .cue-bob {
-    animation: cue-bob 1.8s ease-in-out infinite;
-  }
-}
-
-@keyframes spin-slow {
-  to {
-    transform: rotate(360deg);
   }
 }

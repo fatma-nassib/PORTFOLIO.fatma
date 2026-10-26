@@ -8,7 +8,7 @@ const STORAGE_KEY = 'fatma-theme';
 /**
  * Owns the active theme.
  *
- * Cream is the default; dark restores the original neon design. The choice is
+ * Cream is the default; dark uses the same restrained editorial palette. The choice is
  * persisted and written to `<html data-theme>` (also `<html class="dark">` so
  * the palette variables in styles.css apply), and the browser chrome colour is
  * kept in step with the canvas.
