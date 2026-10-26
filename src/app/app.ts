@@ -3,14 +3,19 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  computed,
+  inject,
   signal,
 } from '@angular/core';
 
-import { NAV_ITEMS, type Stat } from './data/portfolio.data';
+import { NAV_ITEMS, PROFILE } from './data/portfolio.data';
 import { Icon } from './shared/icon';
+import { ThemeService } from './shared/theme.service';
+import { ThemeToggle } from './shared/theme-toggle';
 import { About } from './sections/about';
 import { Certifications } from './sections/certifications';
 import { Contact } from './sections/contact';
+import { Experience } from './sections/experience';
 import { Hero } from './sections/hero';
 import { Interests } from './sections/interests';
 import { Projects } from './sections/projects';
@@ -20,8 +25,10 @@ import { Skills } from './sections/skills';
   selector: 'app-root',
   imports: [
     Icon,
+    ThemeToggle,
     Hero,
     About,
+    Experience,
     Interests,
     Skills,
     Certifications,
@@ -30,48 +37,116 @@ import { Skills } from './sections/skills';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <!-- Preloader -->
-    <div
-      class="fixed inset-0 z-[1000] grid place-items-center bg-ink transition-opacity duration-500"
-      [class.pointer-events-none]="loaded()"
-      [class.opacity-0]="loaded()"
-      aria-hidden="true"
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[1100] focus:rounded-[20px] focus:bg-hillside-ink focus:px-5 focus:py-3 focus:text-caption focus:font-medium focus:text-meadow-cream"
     >
-      <div
-        class="h-16 w-16 animate-[spin-slow_1s_linear_infinite] rounded-full border-[6px] border-zinc-300 border-t-neon"
-      ></div>
-    </div>
+      Skip to content
+    </a>
 
-    <!-- Sidebar navigation -->
+    <!-- Top bar: hamburger left, wordmark center, ghost CTA right. Floats on the photo. -->
     <header
-      class="fixed inset-x-3 top-3 z-50 rounded-2xl border border-white/10 bg-black/50 px-3 py-2 shadow-[0_0_20px_rgba(0,255,255,0.2)] backdrop-blur-md md:inset-x-auto md:left-5 md:top-1/2 md:-translate-y-1/2 md:rounded-3xl md:px-3 md:py-5"
+      class="fixed inset-x-0 top-0 z-50 text-fg transition-colors duration-300"
+      [class.text-fg!]="pastHero()"
+      [class.bg-canvas!]="pastHero()"
+      [style.display]="showsTopBar() ? null : 'none'"
+      (keydown.escape)="menuOpen.set(false)"
     >
-      <nav class="flex items-center justify-between gap-2 md:flex-col md:items-center">
+      <div class="section-shell flex items-center justify-between gap-4 py-4">
+        <button
+          type="button"
+          class="grid h-11 w-11 place-items-center rounded-[20px] border-current transition hover:opacity-70"
+          [attr.aria-expanded]="menuOpen()"
+          aria-controls="site-menu"
+          aria-label="Toggle navigation"
+          (click)="menuOpen.set(!menuOpen())"
+        >
+          <app-icon [name]="menuOpen() ? 'close' : 'menu'" sizeClass="h-5 w-5" />
+        </button>
+
         <a
           href="#home"
-          aria-label="Fatma — back to top"
           (click)="scrollTo('home', $event)"
-          class="hidden h-12 w-12 shrink-0 place-items-center rounded-full border-2 border-neon bg-slate-deep text-sm font-bold text-white transition hover:scale-110 md:mb-4 md:grid"
+          class="screamer text-subheading"
+          aria-label="Fatma — back to top"
         >
-          FN
+          {{ shortName }}
         </a>
+
+        <div class="flex items-center gap-2">
+          <app-theme-toggle />
+          <a
+            href="#contact"
+            (click)="scrollTo('contact', $event)"
+            class="btn hidden px-5 py-2.5 text-caption sm:inline-flex"
+            [class]="pastHero() ? 'btn-ghost' : 'btn-ghost'"
+          >
+            Get in touch <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      @if (menuOpen()) {
+        <div id="site-menu" class="border-t border-current/20 bg-canvas text-fg">
+          <nav aria-label="Primary" class="section-shell grid py-3">
+            @for (item of navItems; track item.id) {
+              <a
+                [attr.href]="'#' + item.id"
+                (click)="scrollTo(item.id, $event)"
+                class="screamer size-heading-sm flex items-baseline justify-between border-b border-line/15 py-2 transition hover:pl-2"
+                [class.text-accent]="activeSection() === item.id"
+              >
+                {{ item.label }}
+                <span class="font-grotesk text-caption font-medium normal-case">
+                  {{ $index + 1 < 10 ? '0' + ($index + 1) : $index + 1 }}
+                </span>
+              </a>
+            }
+          </nav>
+        </div>
+      }
+    </header>
+
+    <!--
+      Side navigation panel.
+      Dark theme: the original floating glass rail, on every screen size.
+      Cream theme: the same rail, restyled as an outlined cream card, so it is
+      never lost behind the light canvas — hidden on phones, where the cream
+      top bar above takes over instead.
+    -->
+    <header
+      class="side-rail fixed inset-x-3 top-3 z-50 px-3 py-2 md:inset-x-auto md:left-5 md:top-1/2 md:-translate-y-1/2 md:px-3 md:py-5"
+      [style.display]="showsTopBar() ? 'none' : null"
+      (keydown.escape)="menuOpen.set(false)"
+    >
+      <nav class="flex items-center justify-between gap-2 md:flex-col md:items-center" aria-label="Primary">
+        <div class="flex items-center gap-2 md:mb-4 md:flex-col">
+          <a
+            href="#home"
+            aria-label="Fatma — back to top"
+            (click)="scrollTo('home', $event)"
+            class="side-avatar grid h-9 w-9 shrink-0 place-items-center rounded-full text-xs font-bold md:h-12 md:w-12 md:text-sm"
+          >
+            {{ initials }}
+          </a>
+          <app-theme-toggle [styled]="themes.isDark()" />
+        </div>
 
         <!-- Desktop links -->
         <ul class="hidden gap-1 md:flex md:flex-col md:items-center">
           @for (item of navItems; track item.id) {
             <li>
               <a
-                [href]="'#' + item.id"
+                [attr.href]="'#' + item.id"
                 (click)="scrollTo(item.id, $event)"
-                [class]="
-                  'relative block px-2 py-2 text-[11px] uppercase tracking-wide transition hover:translate-x-1 hover:text-neon ' +
-                  (activeSection() === item.id ? 'text-neon' : 'text-zinc-300')
-                "
+                class="side-link"
+                [class.is-active]="activeSection() === item.id"
               >
                 {{ item.label }}
                 @if (activeSection() === item.id) {
                   <span
-                    class="absolute -bottom-0.5 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-neon"
+                    class="absolute -bottom-0.5 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-current"
+                    aria-hidden="true"
                   ></span>
                 }
               </a>
@@ -79,13 +154,10 @@ import { Skills } from './sections/skills';
           }
         </ul>
 
-        <!-- Mobile -->
-        <a href="#home" (click)="scrollTo('home', $event)" class="text-xs font-bold text-neon md:hidden">
-          Fatma
-        </a>
+        <!-- Mobile menu -->
         <button
           type="button"
-          class="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-zinc-200 md:hidden"
+          class="side-menu-button grid h-9 w-9 place-items-center rounded-lg md:hidden"
           [attr.aria-expanded]="menuOpen()"
           aria-controls="mobile-menu"
           aria-label="Toggle navigation"
@@ -96,15 +168,14 @@ import { Skills } from './sections/skills';
       </nav>
 
       @if (menuOpen()) {
-        <ul id="mobile-menu" class="mt-2 grid grid-cols-2 gap-1 border-t border-white/10 pt-2 md:hidden">
+        <ul id="mobile-menu" class="side-mobile-menu mt-2 grid grid-cols-2 gap-1 pt-2 md:hidden">
           @for (item of navItems; track item.id) {
             <li>
               <a
-                [href]="'#' + item.id"
+                [attr.href]="'#' + item.id"
                 (click)="scrollTo(item.id, $event)"
-                class="block rounded-lg px-3 py-2 text-xs uppercase tracking-wide transition hover:bg-white/5"
-                [class.text-neon]="activeSection() === item.id"
-                [class.text-zinc-300]="activeSection() !== item.id"
+                class="side-mobile-link block rounded-lg px-3 py-2 text-xs uppercase tracking-wide transition"
+                [class.is-active]="activeSection() === item.id"
               >
                 {{ item.label }}
               </a>
@@ -114,17 +185,19 @@ import { Skills } from './sections/skills';
       }
     </header>
 
-    <main class="md:pl-28">
-      <app-hero (cvRequested)="onCvRequested()" (profileClicked)="notify('Profile image clicked!')" />
-      <app-about (statClicked)="onStatClicked($event)" />
-      <app-skills (skillClicked)="notify('Skill: ' + $event.name + ' — ' + $event.level + '%')" />
+    <main id="main" class="bg-canvas text-fg" [class.md:pl-28]="!showsTopBar()">
+      <app-hero [theme]="themes.theme()" (cvRequested)="onCvRequested()" />
+      <app-about />
+      <app-experience />
+      <app-skills />
       <app-certifications (certificateOpened)="onCertificateOpened($event.name)" />
       <app-projects />
       <app-interests (interestClicked)="notify('Interest clicked: ' + $event)" />
       <app-contact />
 
-      <footer class="border-t border-white/10 py-8 text-center text-xs text-zinc-500">
-        © {{ year }} Fatma Nassib · Built with Angular, TypeScript &amp; Tailwind CSS
+      <footer class="section-shell border-t border-line py-8 text-center text-xs text-fg/60">
+        <p class="screamer size-heading-sm mb-2">{{ shortName }}</p>
+        <p>© {{ year }} · Built with Angular, TypeScript &amp; Tailwind CSS</p>
       </footer>
     </main>
 
@@ -132,7 +205,7 @@ import { Skills } from './sections/skills';
     <div class="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2">
       @if (toast()) {
         <div
-          class="rounded-full border border-neon/50 bg-ink/90 px-5 py-2.5 text-sm text-zinc-100 shadow-[0_0_25px_rgba(0,247,255,0.25)] backdrop-blur"
+          class="rounded-[20px] border-fg bg-fg px-5 py-2.5 text-body text-canvas"
           role="status"
         >
           {{ toast() }}
@@ -142,27 +215,57 @@ import { Skills } from './sections/skills';
   `,
 })
 export class App implements OnInit, OnDestroy {
+  protected readonly themes = inject(ThemeService);
   protected readonly navItems = NAV_ITEMS;
+  protected readonly shortName = PROFILE.shortName;
+  protected readonly initials = PROFILE.initials;
   protected readonly year = new Date().getFullYear();
-  protected readonly loaded = signal(false);
   protected readonly menuOpen = signal(false);
   protected readonly activeSection = signal('home');
   protected readonly toast = signal('');
+  protected readonly scrolled = signal(0);
+  private readonly viewportWidth = signal(1024);
+
+  /** Cream top bar flips to ink once the cream panel has finished covering the photo. */
+  protected readonly pastHero = computed(() => this.scrolled() > 0.86);
+
+  /** Phones use the cream top bar; everything wider uses the side rail. */
+  protected readonly showsTopBar = computed(
+    () => this.viewportWidth() < 768,
+  );
 
   private toastTimer?: ReturnType<typeof setTimeout>;
   private scrollHandler?: () => void;
+  private scrollFrame?: number;
+  private resizeHandler?: () => void;
 
   ngOnInit(): void {
-    setTimeout(() => this.loaded.set(true), 500);
-
-    this.scrollHandler = () => this.updateActiveSection();
+    this.scrollHandler = () => {
+      if (this.scrollFrame !== undefined) {
+        return;
+      }
+      this.scrollFrame = requestAnimationFrame(() => {
+        this.scrollFrame = undefined;
+        this.scrolled.set(window.scrollY / Math.max(1, window.innerHeight));
+        this.updateActiveSection();
+      });
+    };
     window.addEventListener('scroll', this.scrollHandler, { passive: true });
+    this.resizeHandler = () => this.viewportWidth.set(window.innerWidth);
+    this.resizeHandler();
+    window.addEventListener('resize', this.resizeHandler, { passive: true });
     this.updateActiveSection();
   }
 
   ngOnDestroy(): void {
     if (this.scrollHandler) {
       window.removeEventListener('scroll', this.scrollHandler);
+    }
+    if (this.resizeHandler) {
+      window.removeEventListener('resize', this.resizeHandler);
+    }
+    if (this.scrollFrame !== undefined) {
+      cancelAnimationFrame(this.scrollFrame);
     }
     clearTimeout(this.toastTimer);
   }
@@ -174,7 +277,7 @@ export class App implements OnInit, OnDestroy {
     if (!target) {
       return;
     }
-    const top = target.getBoundingClientRect().top + window.scrollY - 80;
+    const top = target.getBoundingClientRect().top + window.scrollY - 72;
     window.scrollTo({ top, behavior: 'smooth' });
   }
 
@@ -185,11 +288,19 @@ export class App implements OnInit, OnDestroy {
   }
 
   protected onCvRequested(): void {
-    this.notify('CV download will be available soon.');
-  }
+    const file = PROFILE.cvFile.trim();
+    if (!file) {
+      this.notify('CV download will be available soon.');
+      return;
+    }
 
-  protected onStatClicked(stat: Stat): void {
-    this.notify(`${stat.value} ${stat.label}`);
+    const link = document.createElement('a');
+    link.href = file;
+    link.download = file.split('/').pop() ?? 'Fatma-Nassib-CV.pdf';
+    link.rel = 'noopener';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
   }
 
   protected onCertificateOpened(name: string): void {
@@ -197,11 +308,25 @@ export class App implements OnInit, OnDestroy {
   }
 
   private updateActiveSection(): void {
+    const marker = window.innerHeight * 0.35;
+    let current = this.activeSection();
+
     for (const section of Array.from(document.querySelectorAll<HTMLElement>('section[id]'))) {
-      const rect = section.getBoundingClientRect();
-      if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
-        this.activeSection.set(section.id);
+      if (section.getBoundingClientRect().top <= marker) {
+        current = section.id;
       }
+    }
+
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 2) {
+      const sections = document.querySelectorAll<HTMLElement>('section[id]');
+      const last = sections[sections.length - 1];
+      if (last) {
+        current = last.id;
+      }
+    }
+
+    if (current !== this.activeSection()) {
+      this.activeSection.set(current);
     }
   }
 }

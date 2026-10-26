@@ -8,7 +8,9 @@ export type IconName =
   | 'download'
   | 'arrow-down'
   | 'menu'
-  | 'close';
+  | 'close'
+  | 'sun'
+  | 'moon';
 
 type IconDef = { readonly filled: boolean; readonly d: string };
 
@@ -33,6 +35,11 @@ const ICONS: Record<IconName, IconDef> = {
   'arrow-down': { filled: false, d: 'M12 4v16m0 0 5-5m-5 5-5-5' },
   menu: { filled: false, d: 'M4 7h16M4 12h16M4 17h16' },
   close: { filled: false, d: 'M6 6l12 12M18 6 6 18' },
+  sun: {
+    filled: false,
+    d: 'M12 4V2m0 20v-2m8-8h2M2 12h2m13.66-5.66 1.41-1.41M4.93 19.07l1.41-1.41m0-11.32L4.93 4.93m14.14 14.14-1.41-1.41M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z',
+  },
+  moon: { filled: false, d: 'M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z' },
 };
 
 @Component({

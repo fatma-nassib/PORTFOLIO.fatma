@@ -39,8 +39,8 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
           formControlName="name"
           placeholder="Your Name"
           autocomplete="name"
-          class="w-full rounded-lg border bg-white/10 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-500 transition focus:border-magenta focus:outline-none"
-          [class.border-neon]="!showError('name')"
+          class="w-full rounded-lg border bg-surface/5 px-4 py-3 text-sm text-fg/90 placeholder:text-muted-soft transition focus:border-accent focus:outline-none"
+          [class.border-accent]="!showError('name')"
           [class.border-red-400]="showError('name')"
         />
         @if (showError('name')) {
@@ -54,8 +54,8 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
           formControlName="email"
           placeholder="Your Email"
           autocomplete="email"
-          class="w-full rounded-lg border bg-white/10 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-500 transition focus:border-magenta focus:outline-none"
-          [class.border-neon]="!showError('email')"
+          class="w-full rounded-lg border bg-surface/5 px-4 py-3 text-sm text-fg/90 placeholder:text-muted-soft transition focus:border-accent focus:outline-none"
+          [class.border-accent]="!showError('email')"
           [class.border-red-400]="showError('email')"
         />
         @if (showError('email')) {
@@ -68,8 +68,8 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
           rows="4"
           formControlName="message"
           placeholder="Your Message"
-          class="w-full resize-y rounded-lg border bg-white/10 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-500 transition focus:border-magenta focus:outline-none"
-          [class.border-neon]="!showError('message')"
+          class="w-full resize-y rounded-lg border bg-surface/5 px-4 py-3 text-sm text-fg/90 placeholder:text-muted-soft transition focus:border-accent focus:outline-none"
+          [class.border-accent]="!showError('message')"
           [class.border-red-400]="showError('message')"
         ></textarea>
         @if (showError('message')) {
@@ -79,13 +79,13 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
         <button
           type="submit"
           [disabled]="status() === 'sending'"
-          class="self-center rounded-full bg-gradient-to-r from-neon to-magenta px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-neon/20 transition hover:-translate-y-0.5 hover:shadow-neon/40 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+          class="self-center rounded-full bg-gradient-to-r from-accent to-magenta px-8 py-3 text-sm font-semibold text-fg shadow-lg shadow-card transition hover:-translate-y-0.5 hover:shadow-card disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
         >
           {{ status() === 'sending' ? 'Sending…' : 'Send Message' }}
         </button>
 
         @if (!hasEndpoint) {
-          <p class="text-center text-xs text-zinc-500">
+          <p class="text-center text-xs text-muted-soft">
             The form is not connected yet — your message opens in your email app instead.
           </p>
         }
@@ -93,7 +93,7 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
         @if (statusMessage()) {
           <p
             class="text-center text-sm"
-            [class.text-neon]="status() === 'success'"
+            [class.text-accent]="status() === 'success'"
             [class.text-red-400]="status() === 'error'"
             role="status"
           >
@@ -102,7 +102,7 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
         }
       </form>
 
-      <p class="mt-14 text-center text-zinc-400">Or reach out via email or social media.</p>
+      <p class="mt-14 text-center text-muted-soft">Or reach out via email or social media.</p>
 
       <div class="mt-6 flex justify-center gap-5">
         @for (link of links; track link.label) {
@@ -112,7 +112,7 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
             [attr.aria-label]="link.title"
             [attr.target]="link.href.startsWith('http') ? '_blank' : null"
             [attr.rel]="link.href.startsWith('http') ? 'noopener noreferrer' : null"
-            class="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-neon to-magenta text-white transition hover:scale-110 hover:shadow-[0_0_20px_rgba(0,247,255,0.5)]"
+            class="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-accent to-magenta text-fg transition hover:scale-110 hover:shadow-[0_0_20px_rgba(0,247,255,0.5)]"
           >
             <app-icon [name]="link.icon" />
           </a>

@@ -88,6 +88,13 @@ export const PROFILE = {
   cvFile: '',
 } as const;
 
+export const IMAGES = {
+  /** Full-bleed hero landscape (served from public/). */
+  meadow: 'images/meadow.jpg',
+  /** Small editorial thumbnail dropped inline into display type. */
+  portrait: 'images/portrait.jpg',
+} as const;
+
 export const NAV_ITEMS: readonly NavItem[] = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
@@ -102,6 +109,9 @@ export const HERO = {
   greeting: 'Hi, I’m Fatma Nassib.',
   roles: 'Software Engineer · Full-Stack Developer · Data Platforms',
   bio: 'I build dependable web applications and data-driven systems — from Angular modules on a live national health platform to service-oriented backends and admin dashboards.',
+  /** Light-theme hero: stamped headline broken into fixed lines. */
+  headline: ['Building', 'software', 'that carries'],
+  headlineTail: 'weight.',
 } as const;
 
 export const ABOUT_TEXT =
@@ -274,6 +284,16 @@ export const PROJECTS: readonly Project[] = [
     stack: ['Angular', 'DHIS2 REST API', 'TypeScript'],
     category: 'data',
     linkLabel: 'Enterprise internal tool',
+  },
+  {
+    title: 'UniSupport',
+    subtitle: 'AI assistant · School assignment',
+    description:
+      'University support AI built as a class project — an intelligent assistant that answers student questions about courses, registration and campus services, trained on university documentation to give fast, accurate responses.',
+    stack: ['Python', 'AI / Machine Learning', 'Flask', 'JavaScript'],
+    category: 'web',
+    url: 'https://unisupport.rejoda.co.tz/',
+    linkLabel: 'View live site',
   },
 ];
 

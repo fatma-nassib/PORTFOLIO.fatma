@@ -1,17 +1,27 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
+/**
+ * Editorial section lockup: numbered eyebrow, oversized stamped statement,
+ * and a short lede set in the body face.
+ */
 @Component({
   selector: 'app-section-heading',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="mb-10">
-      <h2
-        class="inline-block border-b-2 border-magenta pb-2.5 text-2xl font-bold text-white drop-shadow-[0_0_10px_rgba(255,0,255,0.35)] sm:text-3xl"
-      >
-        {{ text() }}
-      </h2>
+    <div class="flex flex-col gap-6 border-t border-hillside-ink pt-5 md:gap-8">
+      <div class="flex items-baseline justify-between gap-6">
+        @if (index()) {
+          <p class="eyebrow text-muted/60">{{ index() }}</p>
+        }
+        @if (eyebrow()) {
+          <p class="eyebrow text-muted/60">{{ eyebrow() }}</p>
+        }
+      </div>
+
+      <h2 class="screamer size-heading max-w-[16ch]">{{ text() }}</h2>
+
       @if (subtitle()) {
-        <p class="mt-4 max-w-2xl text-zinc-400">{{ subtitle() }}</p>
+        <p class="max-w-xl text-body-lg leading-snug text-muted/80">{{ subtitle() }}</p>
       }
     </div>
   `,
@@ -19,4 +29,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 export class SectionHeading {
   readonly text = input.required<string>();
   readonly subtitle = input<string>('');
+  readonly eyebrow = input<string>('');
+  /** Two-digit section number, e.g. "01". */
+  readonly index = input<string>('');
 }

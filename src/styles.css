@@ -1,34 +1,153 @@
 @import 'tailwindcss';
 
-@theme {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Sora', 'Inter', ui-sans-serif, system-ui, sans-serif;
+/* ------------------------------------------------------------------
+   Palette tokens.
 
-  /* Neutral surface scale */
+   Cream (Zipline) is the default. Dark (the original neon theme) is
+   reached with `data-theme="dark"` on <html>. Every component style is
+   written against the semantic tokens below, never a raw hex, so a
+   theme swap is a variable swap.
+   ------------------------------------------------------------------ */
+:root {
+  --cream: #f7f4e8;
+  --cream-deep: #efebdc;
+  --ink: #000;
+  --stone: #c6c3ba;
+  --violet: #643aed;
+  --muted: rgb(0 0 0 / 0.6);
+  --muted-soft: rgb(0 0 0 / 0.35);
+  --line: rgb(0 0 0 / 0.2);
+  --line-strong: #000;
+  --shadow-card: none;
+}
+
+[data-theme='dark'] {
+  --cream: #0a0f1a;
+  --cream-deep: #0f1727;
+  --ink: #f8fafc;
+  --stone: #1e2b42;
+  --violet: #00f7ff;
+  --muted: #a1a1aa;
+  --muted-soft: #52525b;
+  --line: rgb(255 255 255 / 0.1);
+  --line-strong: rgb(255 255 255 / 0.18);
+  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 18px 40px -24px rgb(0 0 0 / 0.7);
+}
+
+@theme {
+  /* Semantic surfaces — resolved from the variables above. */
+  --color-canvas: var(--cream);
+  --color-surface: var(--cream-deep);
+  --color-fg: var(--ink);
+  --color-muted: var(--muted);
+  --color-muted-soft: var(--muted-soft);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--violet);
+
+  /* Original palette names kept for the restored sections. */
+  --color-meadow-cream: var(--cream);
+  --color-hillside-ink: var(--ink);
+  --color-stone-border: var(--stone);
+  --color-drone-violet: var(--violet);
   --color-ink: #0a0f1a;
   --color-ink-soft: #0f1727;
   --color-slate-deep: #16233a;
-
-  /* Accents — cyan primary, magenta secondary (used together for gradients) */
   --color-neon: #00f7ff;
   --color-magenta: #ff00ff;
-  --color-accent: #4f8cff;
   --color-accent-soft: #8fb4ff;
 
-  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 18px 40px -24px rgb(0 0 0 / 0.7);
+  /* Type */
+  --font-grotesk: 'Archivo', 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-screamer: 'Archivo Black', 'Anton', 'Arial Black', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Sora', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --text-caption: 14px;
+  --text-body: 16px;
+  --text-body-lg: 18px;
+  --text-subheading: 22px;
+  --text-heading-sm: 40px;
+  --text-heading: 90px;
+  --text-heading-lg: 120px;
+  --text-display: 150px;
+
+  --radius-token: 20px;
 }
 
 @layer base {
   html {
-    /* Clipping x-scroll on html keeps body out of the scroll-container role,
-       so 100vh sections still fit inside the viewport. */
-    overflow-x: hidden;
+    overflow-x: clip;
+    background: var(--color-canvas);
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   body {
-    @apply font-sans leading-relaxed text-slate-300 antialiased;
-    background: var(--color-ink);
+    @apply font-grotesk text-body text-fg;
+    background: var(--color-canvas);
+    line-height: 1.4;
+    letter-spacing: -0.16px;
+  }
+
+  /*
+    Cream voice: stamped, condensed, always uppercase.
+    Dark voice: the original soft display face, sentence case.
+    Both are plain element selectors inside the base layer so they carry the
+    same specificity as any component selector; the cream body scopes the
+    first rule so it can never leak into the dark theme.
+  */
+  html:not([data-theme='dark']) h1,
+  html:not([data-theme='dark']) h2,
+  html:not([data-theme='dark']) h3,
+  html:not([data-theme='dark']) h4 {
+    font-family: var(--font-screamer);
+    font-weight: 700;
+    line-height: 0.85;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--color-fg);
+    text-wrap: balance;
+  }
+
+  html[data-theme='dark'] h1,
+  html[data-theme='dark'] h2,
+  html[data-theme='dark'] h3,
+  html[data-theme='dark'] h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-transform: none;
+    color: #fff;
+  }
+
+  ::selection {
+    background: var(--color-drone-violet);
+    color: var(--color-canvas);
+  }
+
+  a,
+  button,
+  input,
+  textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  /* Clear the fixed chrome: sidebar on desktop (dark) / top bar on mobile. */
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
+
+  @media (width >=768px) {
+    html[data-theme='light'] section[id] {
+      scroll-margin-top: 4.5rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -39,52 +158,368 @@
       animation-duration: 0.001ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.001ms !important;
-      scroll-behavior: auto !important;
     }
-  }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    @apply font-display text-white;
-    letter-spacing: -0.02em;
-    text-wrap: balance;
-  }
-
-  ::selection {
-    background: color-mix(in srgb, var(--color-accent) 35%, transparent);
-    color: #fff;
-  }
-
-  a:focus-visible,
-  button:focus-visible {
-    @apply outline-2 outline-offset-2 outline-accent;
-  }
-
-  /* Prevent the fixed header from covering anchor targets. */
-  section[id] {
-    scroll-margin-top: 5.5rem;
   }
 }
 
 @layer components {
+  /* ---------------- Cream (editorial) system ---------------- */
+
+  .screamer {
+    @apply font-screamer;
+    font-weight: 700;
+    line-height: 0.85;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: inherit;
+  }
+
+  .size-heading-sm {
+    font-size: clamp(30px, 4.4vw, 40px);
+  }
+
+  .size-heading {
+    font-size: clamp(48px, 9vw, 90px);
+  }
+
+  .size-heading-lg {
+    font-size: clamp(52px, 11.5vw, 120px);
+  }
+
+  .size-display {
+    font-size: clamp(56px, 14vw, 150px);
+  }
+
+  .eyebrow {
+    font-size: 14px;
+    line-height: 1.2;
+    letter-spacing: -0.14px;
+    font-weight: 500;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-[20px] text-body font-medium;
+    padding: 14px 24px;
+    border: 1px solid var(--color-line-strong);
+    transition: background-color 200ms ease, color 200ms ease, transform 200ms ease;
+  }
+
+  .btn-filled {
+    background: var(--color-fg);
+    color: var(--color-canvas);
+    border-color: var(--color-fg);
+  }
+
+  .btn-filled:hover {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-canvas);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-fg);
+  }
+
+  .btn-ghost:hover {
+    background: var(--color-fg);
+    color: var(--color-canvas);
+  }
+
+  .btn-cream {
+    background: var(--color-canvas);
+    color: var(--color-fg);
+    border-color: var(--color-canvas);
+  }
+
+  .btn-cream:hover {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-fg);
+  }
+
+  [data-theme='dark'] .btn-cream:hover {
+    color: var(--color-ink);
+  }
+
+  .card-outline {
+    @apply rounded-[20px];
+    background: var(--color-canvas);
+    border: 1px solid var(--color-line-strong);
+    padding: 24px;
+  }
+
+  .card-violet {
+    @apply rounded-[20px];
+    background: var(--color-accent);
+    color: var(--color-canvas);
+    padding: 24px;
+  }
+
+  [data-theme='dark'] .card-violet {
+    color: var(--color-ink);
+  }
+
+  /*
+    Dark sections keep the original glassy cards. Sections are written once and
+    rendered in both themes, so the dark treatment is layered on here rather
+    than duplicated in every template.
+  */
+  html[data-theme='dark'] .card-outline {
+    background: rgb(255 255 255 / 0.03);
+    border-color: rgb(255 255 255 / 0.1);
+  }
+
+  html[data-theme='dark'] .tag {
+    border-color: rgb(255 255 255 / 0.18);
+  }
+
+  /* The panel that sweeps up over the hero. */
+  .canvas-panel {
+    background: var(--color-canvas);
+    color: var(--color-fg);
+  }
+
+  /* Dark landing panel: ink base with the original neon glow. */
+  .dark-hero {
+    background:
+      radial-gradient(60% 40% at 25% 0%, rgb(0 247 255 / 0.08), transparent 70%),
+      radial-gradient(50% 40% at 80% 100%, rgb(255 0 255 / 0.07), transparent 70%),
+      var(--color-ink);
+  }
+
+  /* Ghost button that sits on the hero photograph. */
+  .hero-ghost-btn {
+    background: transparent;
+    border-color: rgb(255 255 255 / 0.7);
+    color: #fff;
+  }
+
+  .hero-ghost-btn:hover {
+    background: var(--color-meadow-cream);
+    border-color: var(--color-meadow-cream);
+    color: var(--color-ink);
+  }
+
+  /* Violet block typography must not inherit the ink heading colour. */
+  .card-violet h2,
+  .card-violet h3,
+  .card-violet a {
+    color: inherit;
+  }
+
+  .tag {
+    @apply inline-flex items-center rounded-[20px] px-3 py-1;
+    border: 1px solid var(--color-line-strong);
+    font-size: 14px;
+    line-height: 1.2;
+    letter-spacing: -0.14px;
+  }
+
+  .rule {
+    border-top: 1px solid var(--color-line-strong);
+  }
+
+  .section-shell {
+    padding-inline: clamp(20px, 5vw, 64px);
+  }
+
+  .inline-photo {
+    @apply inline-block shrink-0 overflow-hidden rounded-[20px] align-middle;
+    width: 1.55em;
+    height: 0.78em;
+    margin: 0 0.12em;
+    border: 1px solid var(--color-line-strong);
+  }
+
+  .inline-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 28%;
+  }
+
+  /* ---------------- Dark (original neon) system ---------------- */
+
   .container-page {
     @apply mx-auto w-full max-w-6xl px-6 lg:px-10;
   }
 
   .card {
-    @apply rounded-xl border border-white/10 bg-white/[0.03];
+    @apply rounded-xl;
+    border: 1px solid var(--color-line);
+    background: rgb(255 255 255 / 0.03);
     box-shadow: var(--shadow-card);
   }
 
   .pill {
-    @apply inline-flex items-center rounded-full border border-white/12 bg-white/[0.04] px-3 py-1 text-xs font-medium text-slate-300;
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium text-slate-300;
+    border: 1px solid var(--color-line-strong);
+    background: rgb(255 255 255 / 0.04);
+  }
+
+  .text-gradient {
+    @apply bg-linear-to-r from-white via-white to-accent-soft bg-clip-text text-transparent;
+  }
+
+  /* ---------------- Side navigation rail (both themes) ---------------- */
+
+  .side-rail {
+    border-radius: 1rem;
+    border: 1px solid rgb(255 255 255 / 0.1);
+    background: rgb(0 0 0 / 0.5);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 20px rgb(0 255 255 / 0.2);
+    color: #e4e4e7;
+  }
+
+  @media (width >=768px) {
+    .side-rail {
+      border-radius: 1.5rem;
+    }
+  }
+
+  /* Cream: an outlined card on the warm canvas, no glass or glow. */
+  html[data-theme='light'] .side-rail {
+    border-color: var(--color-line-strong);
+    background: var(--color-canvas);
+    backdrop-filter: none;
+    box-shadow: none;
+    color: var(--color-fg);
+  }
+
+  .side-avatar {
+    border: 2px solid var(--color-neon);
+    background: var(--color-slate-deep);
+    color: var(--color-neon);
+    transition: transform 200ms ease;
+  }
+
+  .side-avatar:hover {
+    transform: scale(1.08);
+  }
+
+  html[data-theme='light'] .side-avatar {
+    border-color: var(--color-fg);
+    background: var(--color-fg);
+    color: var(--color-canvas);
+  }
+
+  .side-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    color: #d4d4d8;
+    transition: color 150ms ease, transform 150ms ease;
+  }
+
+  .side-link:hover {
+    color: var(--color-neon);
+    transform: translateX(4px);
+  }
+
+  .side-link.is-active {
+    color: var(--color-neon);
+  }
+
+  /* Cream theme: the toggle button on the light rail reads in ink. */
+  html[data-theme='light'] .side-rail app-theme-toggle button {
+    border-color: var(--color-line-strong);
+    color: var(--color-fg);
+  }
+
+  html[data-theme='light'] .side-rail app-theme-toggle button:hover {
+    border-color: var(--color-fg);
+  }
+
+  html[data-theme='light'] .side-link {
+    color: rgb(0 0 0 / 0.6);
+  }
+
+  html[data-theme='light'] .side-link:hover,
+  html[data-theme='light'] .side-link.is-active {
+    color: var(--color-fg);
+  }
+
+  .side-menu-button {
+    border: 1px solid var(--color-line-strong);
+    color: #e4e4e7;
+  }
+
+  html[data-theme='light'] .side-menu-button {
+    color: var(--color-fg);
+  }
+
+  .side-mobile-menu {
+    border-top: 1px solid rgb(255 255 255 / 0.1);
+  }
+
+  html[data-theme='light'] .side-mobile-menu {
+    border-top-color: var(--color-line);
+  }
+
+  .side-mobile-link {
+    color: #d4d4d8;
+  }
+
+  .side-mobile-link:hover {
+    background: rgb(255 255 255 / 0.05);
+  }
+
+  .side-mobile-link.is-active {
+    color: var(--color-neon);
+  }
+
+  html[data-theme='light'] .side-mobile-link {
+    color: rgb(0 0 0 / 0.7);
+  }
+
+  html[data-theme='light'] .side-mobile-link:hover {
+    background: rgb(0 0 0 / 0.05);
+  }
+
+  html[data-theme='light'] .side-mobile-link.is-active {
+    color: var(--color-fg);
   }
 }
 
-@utility text-gradient {
-  @apply bg-linear-to-r from-white via-white to-accent-soft bg-clip-text text-transparent;
+/* Hero photo drift: a slow pan reads as the landscape moving past. */
+@keyframes meadow-drift {
+  0% {
+    transform: scale(1.08) translate3d(-1.2%, 0, 0);
+  }
+
+  100% {
+    transform: scale(1.14) translate3d(1.2%, -1%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .meadow-drift {
+    animation: meadow-drift 26s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+}
+
+@keyframes cue-bob {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cue-bob {
+    animation: cue-bob 1.8s ease-in-out infinite;
+  }
 }
 
 @keyframes spin-slow {
