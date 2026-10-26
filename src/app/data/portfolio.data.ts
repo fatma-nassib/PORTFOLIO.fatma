@@ -89,8 +89,8 @@ export const PROFILE = {
 } as const;
 
 export const IMAGES = {
-  /** Full-bleed hero landscape (served from public/). */
-  meadow: 'images/meadow.jpg',
+  /** Hero portrait (served from public/). */
+  hero: 'images/fatma-hero.jpg',
   /** Small editorial thumbnail dropped inline into display type. */
   portrait: 'images/portrait.jpg',
 } as const;

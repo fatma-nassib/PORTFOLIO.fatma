@@ -17,10 +17,8 @@ import { Icon } from '../shared/icon';
 /**
  * Hero unified design.
  *
- * A single hero used in both themes: the light-mode full-bleed photo with
- * scroll-driven parallax, paired with the dark mode's words (greeting +
- * roles) as the prominent headline. The cream panel sweeps up over a curved
- * mask as you scroll.
+ * A portrait-led hero with scroll-driven parallax. The canvas panel sweeps up
+ * over the photo as you scroll.
  */
 @Component({
   selector: 'app-hero',
@@ -36,24 +34,24 @@ import { Icon } from '../shared/icon';
     >
         <!-- Clear the fixed chrome: the cream top bar on phones; from md the rail sits beside the content. -->
         <div class="relative h-[100svh] overflow-hidden">
-          <div class="absolute inset-0 [transform:translate3d(0,calc(var(--p)*12svh),0)_scale(calc(1+var(--p)*0.08))]">
+          <div class="absolute inset-0 right-0 md:w-[68%] [transform:translate3d(0,calc(var(--p)*12svh),0)_scale(calc(1+var(--p)*0.08))]">
             <img
-              [src]="images.meadow"
+              [src]="images.hero"
               alt=""
               aria-hidden="true"
-              class="h-full w-full object-cover"
+              class="h-full w-full object-cover object-[center_20%]"
               fetchpriority="high"
             />
           </div>
 
-          <!-- Legibility wash, top and bottom only, colour stays natural. -->
+          <!-- Fade the portrait into the canvas so the copy stays legible. -->
           <div
-            class="pointer-events-none absolute inset-0 bg-linear-to-b from-black/45 via-black/5 to-black/60"
+            class="pointer-events-none absolute inset-0 bg-linear-to-b from-canvas/5 via-transparent to-canvas/95 md:bg-linear-to-r md:from-canvas md:via-canvas/95 md:via-50% md:to-transparent"
             aria-hidden="true"
           ></div>
 
           <div
-            class="section-shell relative flex h-full flex-col justify-end pb-10 pt-[calc(4.5rem+2svh)] text-fg md:pb-24"
+            class="section-shell relative flex h-full flex-col justify-end pb-10 pt-[calc(4.5rem+2svh)] text-fg md:max-w-[58%] md:justify-center md:pb-10"
             [style.opacity]="contentOpacity()"
             [style.transform]="'translate3d(0,' + -progress() * 6 + 'rem,0)'"
           >
