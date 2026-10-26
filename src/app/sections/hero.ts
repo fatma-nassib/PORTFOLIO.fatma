@@ -34,19 +34,19 @@ import { Icon } from '../shared/icon';
     >
         <!-- Clear the fixed chrome: the cream top bar on phones; from md the rail sits beside the content. -->
         <div class="relative h-[100svh] overflow-hidden">
-          <div class="absolute inset-0 right-0 md:w-[68%] [transform:translate3d(0,calc(var(--p)*12svh),0)_scale(calc(1+var(--p)*0.08))]">
+          <div class="absolute inset-0 md:inset-y-0 md:left-auto md:right-0 md:w-[68%] [transform:translate3d(0,calc(var(--p)*12svh),0)_scale(calc(1+var(--p)*0.08))]">
             <img
               [src]="images.hero"
               alt=""
               aria-hidden="true"
-              class="h-full w-full object-cover object-[center_20%]"
+              class="h-full w-full object-cover object-[center_15%]"
               fetchpriority="high"
             />
           </div>
 
           <!-- Fade the portrait into the canvas so the copy stays legible. -->
           <div
-            class="pointer-events-none absolute inset-0 bg-linear-to-b from-canvas/5 via-transparent to-canvas/95 md:bg-linear-to-r md:from-canvas md:via-canvas/95 md:via-50% md:to-transparent"
+            class="pointer-events-none absolute inset-0 bg-linear-to-b from-canvas/5 via-transparent to-canvas/85 md:bg-linear-to-r md:from-canvas md:via-canvas/80 md:via-45% md:to-transparent md:to-80%"
             aria-hidden="true"
           ></div>
 
