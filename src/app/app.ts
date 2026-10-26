@@ -68,7 +68,7 @@ import { Skills } from './sections/skills';
           href="#home"
           (click)="scrollTo('home', $event)"
           class="screamer text-subheading"
-          aria-label="Fatma — back to top"
+          aria-label="Fatma back to top"
         >
           {{ shortName }}
         </a>
@@ -81,7 +81,7 @@ import { Skills } from './sections/skills';
             class="btn hidden px-5 py-2.5 text-caption sm:inline-flex"
             [class]="pastHero() ? 'btn-ghost' : 'btn-ghost'"
           >
-            Get in touch <span aria-hidden="true">↗</span>
+            Get in touch
           </a>
         </div>
       </div>
@@ -111,7 +111,7 @@ import { Skills } from './sections/skills';
       Side navigation panel.
       Dark theme: the original floating glass rail, on every screen size.
       Cream theme: the same rail, restyled as an outlined cream card, so it is
-      never lost behind the light canvas — hidden on phones, where the cream
+      never lost behind the light canvas. Hidden on phones, where the cream
       top bar above takes over instead.
     -->
     <header
@@ -123,7 +123,7 @@ import { Skills } from './sections/skills';
         <div class="flex items-center gap-2 md:mb-4 md:flex-col">
           <a
             href="#home"
-            aria-label="Fatma — back to top"
+            aria-label="Fatma back to top"
             (click)="scrollTo('home', $event)"
             class="side-avatar grid h-9 w-9 shrink-0 place-items-center rounded-full text-xs font-bold md:h-12 md:w-12 md:text-sm"
           >
@@ -188,10 +188,10 @@ import { Skills } from './sections/skills';
     <main id="main" class="bg-canvas text-fg" [class.md:pl-28]="!showsTopBar()">
       <app-hero [theme]="themes.theme()" (cvRequested)="onCvRequested()" />
       <app-about />
-      <app-experience />
       <app-skills />
-      <app-certifications (certificateOpened)="onCertificateOpened($event.name)" />
+      <app-experience />
       <app-projects />
+      <app-certifications (certificateOpened)="onCertificateOpened($event.name)" />
       <app-interests (interestClicked)="notify('Interest clicked: ' + $event)" />
       <app-contact />
 

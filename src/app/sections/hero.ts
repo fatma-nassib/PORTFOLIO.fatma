@@ -13,9 +13,10 @@ import { DOCUMENT } from '@angular/common';
 
 import { HERO, IMAGES, NAV_ITEMS, PROFILE } from '../data/portfolio.data';
 import { Icon } from '../shared/icon';
+import { LottiePlayer } from '../shared/lottie-player';
 
 /**
- * Hero — unified design.
+ * Hero unified design.
  *
  * A single hero used in both themes: the light-mode full-bleed photo with
  * scroll-driven parallax, paired with the dark mode's words (greeting +
@@ -24,7 +25,7 @@ import { Icon } from '../shared/icon';
  */
 @Component({
   selector: 'app-hero',
-  imports: [Icon],
+  imports: [Icon, LottiePlayer],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section
@@ -46,7 +47,7 @@ import { Icon } from '../shared/icon';
             />
           </div>
 
-          <!-- Legibility wash, top and bottom only — colour stays natural. -->
+          <!-- Legibility wash, top and bottom only, colour stays natural. -->
           <div
             class="pointer-events-none absolute inset-0 bg-linear-to-b from-black/45 via-black/5 to-black/60"
             aria-hidden="true"
@@ -73,13 +74,19 @@ import { Icon } from '../shared/icon';
               {{ hero.roles }}
             </p>
 
+            <app-lottie-player
+              animationUrl="https://assets9.lottiefiles.com/packages/lf20_jbrw3hcz.json"
+              containerClass="h-16 w-16 md:h-20 md:w-20"
+              [loop]="true"
+              [autoplay]="true"
+            />
+
             <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <div class="max-w-xl">
                 <p class="max-w-lg text-caption leading-snug text-fg/90 md:text-body">{{ hero.bio }}</p>
                 <div class="mt-5 flex flex-wrap gap-3 md:mt-6">
                   <a href="#about" class="btn btn-cream px-5 py-3 text-caption md:text-body">
                     See the work
-                    <span aria-hidden="true">↓</span>
                   </a>
                   <button
                     type="button"
@@ -94,7 +101,7 @@ import { Icon } from '../shared/icon';
               </div>
 
               <p class="eyebrow flex items-center gap-2 text-fg/80 md:pb-2">
-                <span class="cue-bob inline-block" aria-hidden="true">↓</span>
+                <span class="cue-bob inline-block" aria-hidden="true"></span>
                 Scroll
               </p>
             </div>

@@ -35,7 +35,7 @@
 }
 
 @theme {
-  /* Semantic surfaces — resolved from the variables above. */
+  /* Semantic surfaces resolved from the variables above. */
   --color-canvas: var(--cream);
   --color-surface: var(--cream-deep);
   --color-fg: var(--ink);

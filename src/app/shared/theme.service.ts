@@ -58,7 +58,7 @@ export class ThemeService {
     try {
       this.document.defaultView?.localStorage.setItem(STORAGE_KEY, theme);
     } catch {
-      // Private mode with storage disabled — the in-memory choice still works.
+      // Private mode with storage disabled, the in-memory choice still works.
     }
   }
 }

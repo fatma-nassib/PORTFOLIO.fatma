@@ -59,7 +59,7 @@ export type Certification = {
   readonly issuer: string;
   readonly issued: string;
   readonly focus: SkillCategory;
-  /** Public credential link — omit when the certificate is offline only. */
+  /** Public credential link, omit when the certificate is offline only. */
   readonly url?: string;
 };
 
@@ -99,8 +99,10 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
+  { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
   { id: 'certifications', label: 'Certificates' },
+  { id: 'interests', label: 'Interests' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -108,7 +110,7 @@ export const HERO = {
   eyebrow: 'Computer Science Graduate · University of Dar es Salaam',
   greeting: 'Hi, I’m Fatma Nassib.',
   roles: 'Software Engineer · Full-Stack Developer · Data Platforms',
-  bio: 'I build dependable web applications and data-driven systems — from Angular modules on a live national health platform to service-oriented backends and admin dashboards.',
+  bio: 'I build dependable web applications and data-driven systems. From Angular modules on a live national health platform to service-oriented backends and admin dashboards.',
   /** Light-theme hero: stamped headline broken into fixed lines. */
   headline: ['Building', 'software', 'that carries'],
   headlineTail: 'weight.',
@@ -138,7 +140,7 @@ export const EXPERIENCE: readonly Experience[] = [
   },
   {
     role: 'Developer & Project Manager',
-    company: 'Youth Team Up — EU Erasmus+ Diverse Grow',
+    company: 'Youth Team Up, EU Erasmus+ Diverse Grow',
     period: 'Jul 2025 – Jun 2026',
     location: 'Remote',
     highlights: [
@@ -168,7 +170,7 @@ export const EXPERIENCE: readonly Experience[] = [
   },
   {
     role: 'ICT Mentor',
-    company: 'Help to Help — TGEE IT Bootcamp',
+    company: 'Help to Help, TGEE IT Bootcamp',
     period: 'Mar 2026 – Apr 2026',
     location: 'Dar es Salaam, Tanzania',
     highlights: [
@@ -270,7 +272,7 @@ export const PROJECTS: readonly Project[] = [
     title: 'Diverse Grow Platform',
     subtitle: 'Youth Team Up · EU Erasmus+',
     description:
-      'Angular platform connecting farm suppliers, farmers, middlemen, buyers, sellers and transporters across an international youth cohort — delivered as developer and project manager.',
+      'Angular platform connecting farm suppliers, farmers, middlemen, buyers, sellers and transporters across an international youth cohort. Delivered as developer and project manager.',
     stack: ['Angular', 'TypeScript', 'Agile Delivery'],
     category: 'web',
     url: 'https://diverse-grow-vfinal.vercel.app',
@@ -287,10 +289,10 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     title: 'UniSupport',
-    subtitle: 'AI assistant · School assignment',
+    subtitle: 'University support assistant',
     description:
-      'University support AI built as a class project — an intelligent assistant that answers student questions about courses, registration and campus services, trained on university documentation to give fast, accurate responses.',
-    stack: ['Python', 'AI / Machine Learning', 'Flask', 'JavaScript'],
+      'A university support assistant built as a university project. It answers student questions about courses, registration and campus services, trained on university documentation to give fast, accurate responses.',
+    stack: ['Python', 'Machine Learning', 'Flask', 'JavaScript'],
     category: 'web',
     url: 'https://unisupport.rejoda.co.tz/',
     linkLabel: 'View live site',
@@ -310,7 +312,7 @@ export const INTERESTS: readonly string[] = [
 export const EDUCATION: readonly Education[] = [
   {
     qualification: 'BSc Computer Science',
-    institution: 'University of Dar es Salaam — College of ICT',
+    institution: 'University of Dar es Salaam, College of ICT',
     period: 'Graduated 2026',
     detail: 'Final year project: Rishfy, a service-oriented ride-sharing platform.',
   },
@@ -337,8 +339,8 @@ export const CERTIFICATIONS: readonly Certification[] = [
 ];
 
 export const LEADERSHIP: readonly string[] = [
-  'Imbeju Smart-Elite Ambassador — CRDB Foundation · Feb 2026 – Present',
-  'Cybersecurity Ambassador — CyberCode Africa · 2026',
+  'Imbeju Smart-Elite Ambassador, CRDB Foundation · Feb 2026 – Present',
+  'Cybersecurity Ambassador, CyberCode Africa · 2026',
 ];
 
 export const CONTACT_LINKS: readonly ContactLink[] = [

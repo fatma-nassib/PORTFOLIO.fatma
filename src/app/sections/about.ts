@@ -29,7 +29,7 @@ import { SectionHeading } from '../shared/section-heading';
           />
         </div>
         <p class="text-center text-xs uppercase tracking-[0.2em] text-muted-soft">
-          Fatma Nassib — Software Engineer
+          Fatma Nassib, Software Engineer
         </p>
       </div>
     </section>

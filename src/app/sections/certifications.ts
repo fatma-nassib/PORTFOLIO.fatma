@@ -31,7 +31,7 @@ import { SectionHeading } from '../shared/section-heading';
                 (click)="certificateOpened.emit(cert)"
                 class="mt-auto inline-block pt-4 text-sm font-medium text-accent transition hover:text-accent hover:underline"
               >
-                View Certificate →
+                View Certificate
                 <span class="sr-only">(opens in a new tab)</span>
               </a>
             } @else {
@@ -40,7 +40,7 @@ import { SectionHeading } from '../shared/section-heading';
                 (click)="certificateOpened.emit(cert)"
                 class="mt-auto inline-block pt-4 text-left text-sm font-medium text-accent transition hover:text-accent hover:underline"
               >
-                View Certificate →
+                View Certificate
               </button>
             }
           </article>

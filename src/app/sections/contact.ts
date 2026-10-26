@@ -86,7 +86,7 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
         @if (!hasEndpoint) {
           <p class="text-center text-xs text-muted-soft">
-            The form is not connected yet — your message opens in your email app instead.
+            The form is not connected yet. Your message opens in your email app instead.
           </p>
         }
 
@@ -183,7 +183,7 @@ export class Contact {
 
   private openMailFallback(value: { name: string; email: string; message: string }): void {
     const subject = encodeURIComponent(`Portfolio enquiry from ${value.name}`);
-    const body = encodeURIComponent(`${value.message}\n\n— ${value.name} (${value.email})`);
+    const body = encodeURIComponent(`${value.message}\n\n, ${value.name} (${value.email})`);
     window.location.href = `mailto:${PROFILE.email}?subject=${subject}&body=${body}`;
     this.status.set('success');
     this.statusMessage.set(`Opening your email app to send this to ${PROFILE.email}.`);

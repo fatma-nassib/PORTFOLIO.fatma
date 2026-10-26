@@ -78,7 +78,6 @@ type ProjectFilter = ProjectCategory | 'all';
                   class="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition hover:underline"
                 >
                   {{ project.linkLabel }}
-                  <span aria-hidden="true">→</span>
                   <span class="sr-only">(opens in a new tab)</span>
                 </a>
               } @else {
