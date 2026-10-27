@@ -74,7 +74,6 @@ export type ContactLink = {
 
 export const PROFILE = {
   name: 'Fatma Nassib Abdallah',
-  initials: 'FN',
   title: 'Technology Graduate',
   location: 'Dar es Salaam, Tanzania',
   email: 'abdallah.nassib.fatma@gmail.com',
@@ -94,6 +93,8 @@ export const PROFILE = {
 export const IMAGES = {
   /** Hero portrait (served from public/). */
   hero: 'images/lv_0_20261027193429.jpg',
+  /** Navigation avatar (served from public/). */
+  avatar: 'images/fatma-avatar.jpg',
   /** About-section portrait (served from public/). */
   portrait: 'images/fatma-about.jpg',
 } as const;

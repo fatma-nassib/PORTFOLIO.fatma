@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 
-import { NAV_ITEMS, PROFILE } from './data/portfolio.data';
+import { IMAGES, NAV_ITEMS, PROFILE } from './data/portfolio.data';
 import { Icon } from './shared/icon';
 import { ThemeService } from './shared/theme.service';
 import { ThemeToggle } from './shared/theme-toggle';
@@ -132,9 +132,9 @@ import { Skills } from './sections/skills';
             href="#home"
             aria-label="Fatma Nassib Abdallah, back to top"
             (click)="scrollTo('home', $event)"
-            class="side-avatar grid h-9 w-9 shrink-0 place-items-center rounded-full text-xs font-bold md:h-12 md:w-12 md:text-sm"
+            class="side-avatar grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-full md:h-12 md:w-12"
           >
-            {{ initials }}
+            <img [src]="images.avatar" alt="" class="h-full w-full object-cover" />
           </a>
           <app-theme-toggle [styled]="themes.isDark()" />
         </div>
@@ -224,7 +224,7 @@ export class App implements OnInit, OnDestroy {
   protected readonly themes = inject(ThemeService);
   protected readonly navItems = NAV_ITEMS;
   protected readonly name = PROFILE.name;
-  protected readonly initials = PROFILE.initials;
+  protected readonly images = IMAGES;
   protected readonly menuOpen = signal(false);
   protected readonly activeSection = signal('home');
   protected readonly toast = signal('');
