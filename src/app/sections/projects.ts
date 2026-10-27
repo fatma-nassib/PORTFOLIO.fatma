@@ -1,8 +1,12 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
+  ElementRef,
   signal,
+  viewChild,
 } from '@angular/core';
 
 import {
@@ -45,8 +49,15 @@ type ProjectFilter = ProjectCategory | 'all';
         }
       </div>
 
-      <!-- Keyed on the filter so switching tabs replays the sequence. -->
+      <!--
+        Keyed on the filter so switching tabs replays the sequence: the @for
+        re-creates the cards and the stagger directive runs again over them.
+      -->
       <div
+        #grid
+        appStagger
+        [staggerGap]="60"
+        [staggerMax]="420"
         [attr.data-filter]="activeFilter()"
         class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
       >
@@ -110,6 +121,25 @@ type ProjectFilter = ProjectCategory | 'all';
   `,
 })
 export class Projects {
+  private readonly grid = viewChild<ElementRef<HTMLElement>>('grid');
+
+  constructor() {
+    // Replays the entrance after a filter switch. The directive timings are read
+    // untracked, so only the filter itself triggers a run; the empty read forces
+    // the cards in and the write on the next tick lets the directive fade them
+    // back up in sequence.
+    effect(() => {
+      this.activeFilter();
+      const grid = this.grid()?.nativeElement;
+      if (!grid) {
+        return;
+      }
+      grid.classList.remove('is-staggered');
+      void grid.offsetHeight;
+      afterNextRender(() => grid.classList.add('is-staggered'));
+    });
+  }
+
   protected readonly filters = PROJECT_FILTERS;
   protected readonly activeFilter = signal<ProjectFilter>('all');
 
