@@ -349,6 +349,7 @@ export const CERTIFICATIONS: readonly Certification[] = [
   { name: 'DHIS2 Online Academy Certificate', issuer: 'DHIS2 Online Academy', issued: '2025', focus: 'engineering', url: '/hisp%20GEN-D001-en%20Certificate%20_%20DHIS2%20Online%20Academy.pdf' },
   { name: 'Technology Track Mentorship Program', issuer: 'STEMHER Network Tanzania', issued: '2025', focus: 'product', url: '/Fatma%20Abdallah.pdf' },
   { name: 'Diverse Grow Project Certificate of Attendance', issuer: 'YouthTeamUp', issued: 'Jul 2025', focus: 'product', url: '/4th%20SVE%20certificate_0092.pdf' },
+  { name: 'YouthTeamUp Deep Virtual Exchange (DVE)', issuer: 'YouthTeamUp', issued: '2026', focus: 'product', url: '/DVE%2004%202026%20-%20Fatma.pdf' },
   { name: 'The Role of AI and Digital Skills for Career Success', issuer: 'Imbeju SmartElite', issued: 'Mar 2026', focus: 'product', url: '/certificate-Fatma-Abdallah-.png' },
   { name: 'ICT Skills Mentor', issuer: 'Help to Help Foundation', issued: 'Apr 2026', focus: 'product', url: '/FATMA%20NASSIB%20ABDALLAH%20-%20mentor.pdf' },
   { name: 'Web Development Certificate', issuer: 'Power Learn Project (PLP)', issued: '2024', focus: 'engineering' },

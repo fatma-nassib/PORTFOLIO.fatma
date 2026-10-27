@@ -94,7 +94,7 @@ import { Magnetic } from '../shared/magnetic.directive';
               {{ hero.roles }}
             </p>
 
-            <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div class="flex flex-col gap-6">
               <div class="max-w-xl">
                 <p
                   class="rise-in max-w-lg text-caption leading-snug text-fg/90 md:text-body"
@@ -127,13 +127,6 @@ import { Magnetic } from '../shared/magnetic.directive';
                 </div>
               </div>
 
-              <p
-                class="eyebrow rise-in flex items-center gap-2.5 text-fg/70 md:pb-2"
-                style="--enter-delay: 640ms"
-              >
-                <span class="rule-accent bg-fg/50" aria-hidden="true"></span>
-                Scroll
-              </p>
             </div>
           </div>
         </div>
