@@ -75,7 +75,7 @@ export type ContactLink = {
 export const PROFILE = {
   name: 'Fatma Nassib Abdallah',
   initials: 'FN',
-  title: 'Computer Science Graduate',
+  title: 'Technology Graduate',
   location: 'Dar es Salaam, Tanzania',
   email: 'abdallah.nassib.fatma@gmail.com',
   phone: '+255 616 432 464',
@@ -110,9 +110,9 @@ export const NAV_ITEMS: readonly NavItem[] = [
 ];
 
 export const HERO = {
-  eyebrow: 'BSc Computer Science, University of Dar es Salaam',
+  eyebrow: 'University of Dar es Salaam, Class of 2026',
   greeting: "I'm Fatma Nassib Abdallah.",
-  roles: 'Computer Science graduate. Web and mobile development, cybersecurity, and networking.',
+  roles: 'Web and mobile development, cybersecurity, and networking.',
   bio: 'I have worked on web and mobile applications, including Angular modules for a national health information system, backend services, and admin dashboards.',
   /** Light-theme hero: stamped headline broken into fixed lines. */
   headline: ['Building', 'software', 'that carries'],
@@ -120,10 +120,10 @@ export const HERO = {
 } as const;
 
 export const ABOUT_TEXT =
-  'I graduated with a BSc in Computer Science from the University of Dar es Salaam in 2026. I have worked with Angular and Next.js on web applications, and Node.js, Fastify, and PostgreSQL on backend services. My experience also includes IT support and network maintenance at the Tanzania Revenue Authority, as well as cybersecurity training.';
+  'I graduated from the University of Dar es Salaam in 2026. I have worked with Angular and Next.js on web applications, and Node.js, Fastify, and PostgreSQL on backend services. My experience also includes IT support and network maintenance at the Tanzania Revenue Authority, as well as cybersecurity training.';
 
 export const STATS: readonly Stat[] = [
-  { value: '2026', label: 'BSc Computer Science' },
+  { value: '2026', label: 'Graduated' },
   { value: '05', label: 'Professional roles' },
   { value: '07', label: 'Certifications' },
   { value: '03', label: 'Shipped products' },

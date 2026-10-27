@@ -30,7 +30,7 @@ import { Stagger } from '../shared/stagger.directive';
           />
         </div>
         <p class="text-center text-xs uppercase tracking-[0.2em] text-muted-soft">
-          Fatma Nassib Abdallah, Computer Science graduate
+          Fatma Nassib Abdallah
         </p>
       </div>
     </section>
