@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 /**
- * Editorial section lockup: numbered eyebrow, oversized stamped statement,
- * and a short lede set in the body face.
+ * Section heading with an optional index, eyebrow, and subtitle.
  */
 @Component({
   selector: 'app-section-heading',

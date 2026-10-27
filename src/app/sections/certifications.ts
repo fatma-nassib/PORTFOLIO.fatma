@@ -14,7 +14,7 @@ import { Stagger } from '../shared/stagger.directive';
       id="certifications"
       class="page-section scroll-mt-24"
     >
-      <app-section-heading text="Certifications" index="05" subtitle="Credentials and programmes completed." />
+      <app-section-heading text="Certifications" index="05" subtitle="Certifications and training." />
 
       <div appStagger [staggerGap]="60" [staggerMax]="420" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         @for (cert of certifications; track cert.name) {
@@ -35,13 +35,7 @@ import { Stagger } from '../shared/stagger.directive';
                 <span class="sr-only">(opens in a new tab)</span>
               </a>
             } @else {
-              <button
-                type="button"
-                (click)="certificateOpened.emit(cert)"
-                class="mt-auto inline-block pt-4 text-left text-sm font-medium text-accent transition-colors hover:text-fg"
-              >
-                View Certificate
-              </button>
+              <p class="mt-auto pt-4 text-sm text-muted-soft">Certificate available on request.</p>
             }
           </article>
         }

@@ -72,9 +72,9 @@ import { Skills } from './sections/skills';
           href="#home"
           (click)="scrollTo('home', $event)"
           class="screamer text-subheading"
-          aria-label="Fatma back to top"
+          aria-label="Fatma Nassib Abdallah, back to top"
         >
-          {{ shortName }}
+          {{ name }}
         </a>
 
         <div class="flex items-center gap-2">
@@ -86,9 +86,8 @@ import { Skills } from './sections/skills';
             (click)="scrollTo('contact', $event)"
             class="btn btn-ghost hidden px-5 py-2.5 text-caption sm:inline-flex"
           >
-            <!-- Accent dot: the single "live" signal in the chrome. -->
-            <span class="relative inline-block h-1.5 w-1.5 rounded-full bg-accent pulse-dot" aria-hidden="true"></span>
             Get in touch
+            <app-icon name="arrow-up-right" sizeClass="h-4 w-4" />
           </a>
         </div>
       </div>
@@ -130,7 +129,7 @@ import { Skills } from './sections/skills';
         <div class="flex items-center gap-2 md:mb-4 md:flex-col">
           <a
             href="#home"
-            aria-label="Fatma back to top"
+            aria-label="Fatma Nassib Abdallah, back to top"
             (click)="scrollTo('home', $event)"
             class="side-avatar grid h-9 w-9 shrink-0 place-items-center rounded-full text-xs font-bold md:h-12 md:w-12 md:text-sm"
           >
@@ -151,10 +150,10 @@ import { Skills } from './sections/skills';
               >
                 {{ item.label }}
                 @if (activeSection() === item.id) {
-                  <span
-                    class="absolute -bottom-0.5 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-current"
-                    aria-hidden="true"
-                  ></span>
+                  <app-icon
+                    name="circle-dot"
+                    sizeClass="absolute -bottom-1 left-1/2 h-3.5 w-3.5 -translate-x-1/2"
+                  />
                 }
               </a>
             </li>
@@ -199,12 +198,11 @@ import { Skills } from './sections/skills';
       <app-experience appReveal />
       <app-projects appReveal />
       <app-certifications appReveal (certificateOpened)="onCertificateOpened($event.name)" />
-      <app-interests appReveal (interestClicked)="notify('Interest clicked: ' + $event)" />
+      <app-interests appReveal />
       <app-contact appReveal />
 
       <footer class="section-shell border-t border-line py-8 text-center text-xs text-fg/60">
-        <p class="screamer size-heading-sm mb-2">{{ shortName }}</p>
-        <p>© {{ year }} · Built with Angular, TypeScript &amp; Tailwind CSS</p>
+        <p class="screamer size-heading-sm mb-2">{{ name }}</p>
       </footer>
     </main>
 
@@ -224,9 +222,8 @@ import { Skills } from './sections/skills';
 export class App implements OnInit, OnDestroy {
   protected readonly themes = inject(ThemeService);
   protected readonly navItems = NAV_ITEMS;
-  protected readonly shortName = PROFILE.shortName;
+  protected readonly name = PROFILE.name;
   protected readonly initials = PROFILE.initials;
-  protected readonly year = new Date().getFullYear();
   protected readonly menuOpen = signal(false);
   protected readonly activeSection = signal('home');
   protected readonly toast = signal('');

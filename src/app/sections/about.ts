@@ -25,12 +25,12 @@ import { Stagger } from '../shared/stagger.directive';
         >
           <img
             [src]="images.portrait"
-            alt="Portrait of Fatma Nassib"
+            alt="Portrait of Fatma Nassib Abdallah"
             class="h-full w-full object-cover object-center"
           />
         </div>
         <p class="text-center text-xs uppercase tracking-[0.2em] text-muted-soft">
-          Fatma Nassib, Software Engineer
+          Fatma Nassib Abdallah, Computer Science graduate
         </p>
       </div>
     </section>

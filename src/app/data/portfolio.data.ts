@@ -12,7 +12,7 @@ export type SkillCategory = 'engineering' | 'data' | 'infrastructure' | 'product
 
 export type Skill = {
   readonly name: string;
-  /** Self-assessed confidence, 0–100. */
+  /** Self-assessed confidence, from 0 to 100. */
   readonly level: number;
 };
 
@@ -74,9 +74,8 @@ export type ContactLink = {
 
 export const PROFILE = {
   name: 'Fatma Nassib Abdallah',
-  shortName: 'Fatma Nassib',
   initials: 'FN',
-  title: 'Software Engineer',
+  title: 'Computer Science Graduate',
   location: 'Dar es Salaam, Tanzania',
   email: 'abdallah.nassib.fatma@gmail.com',
   phone: '+255 616 432 464',
@@ -87,7 +86,7 @@ export const PROFILE = {
   whatsappHref: 'https://wa.me/255673732464',
   linkedin: 'https://www.linkedin.com/in/fatma-abdallah-21665b277',
   github: 'https://github.com/fatma-nassib',
-  availability: 'Open to graduate and junior engineering roles',
+  availability: 'Open to graduate roles in software development',
   /** Relative path to the CV inside `public/` (leading slash = site root). */
   cvFile: '/Fatma_Nassib_Official_CV.pdf',
 } as const;
@@ -111,17 +110,17 @@ export const NAV_ITEMS: readonly NavItem[] = [
 ];
 
 export const HERO = {
-  eyebrow: 'Computer Science Graduate · University of Dar es Salaam',
-  greeting: 'Hi, I’m Fatma Nassib.',
-  roles: 'Software Engineer · Full-Stack Developer · Data Platforms',
-  bio: 'I build dependable web applications and data-driven systems. From Angular modules on a live national health platform to service-oriented backends and admin dashboards.',
+  eyebrow: 'BSc Computer Science, University of Dar es Salaam',
+  greeting: "I'm Fatma Nassib Abdallah.",
+  roles: 'Computer Science graduate. Web and mobile development.',
+  bio: 'I have worked on web and mobile applications, including Angular modules for a national health information system, backend services, and admin dashboards.',
   /** Light-theme hero: stamped headline broken into fixed lines. */
   headline: ['Building', 'software', 'that carries'],
   headlineTail: 'weight.',
 } as const;
 
 export const ABOUT_TEXT =
-  'I recently completed a BSc in Computer Science at the University of Dar es Salaam and now work across the full stack: Angular and Next.js on the front end, Node.js, Fastify and PostgreSQL on the back end. Alongside product work I bring practical IT infrastructure experience from the Tanzania Revenue Authority and a strong grounding in security, which helps me build systems that are not only useful but maintainable and safe.';
+  'I graduated with a BSc in Computer Science from the University of Dar es Salaam in 2026. I have worked with Angular and Next.js on web applications, and Node.js, Fastify, and PostgreSQL on backend services. My experience also includes IT support and network maintenance at the Tanzania Revenue Authority, as well as cybersecurity training.';
 
 export const STATS: readonly Stat[] = [
   { value: '2026', label: 'BSc Computer Science' },
@@ -132,53 +131,53 @@ export const STATS: readonly Stat[] = [
 
 export const EXPERIENCE: readonly Experience[] = [
   {
-    role: 'Assistant IT & Conference Technology Lead',
+    role: 'Assistant IT and Conference Technology Lead',
     company: 'PAYCON AFRICA',
-    period: 'Apr 2026 – Sep 2026',
-    location: 'Addis Ababa, Ethiopia · Remote',
+    period: 'Apr 2026 - Sep 2026',
+    location: 'Addis Ababa, Ethiopia, remote',
     highlights: [
-      'Support conference technology operations and digital coordination for a pan-African payments platform.',
-      'Assist with technical planning, participant systems and live event technology to keep sessions running to schedule.',
+      'Supported conference technology and online systems for a payments organization operating across Africa.',
+      'Helped plan technical requirements, participant systems, and live event support.',
     ],
   },
   {
     role: 'Developer & Project Manager',
     company: 'Youth Team Up, EU Erasmus+ Diverse Grow',
-    period: 'Jul 2025 – Jun 2026',
+    period: 'Jul 2025 - Jun 2026',
     location: 'Remote',
     highlights: [
-      'Managed end-to-end delivery of the Diverse Grow initiative, coordinating a cross-functional, multi-country youth team against fixed milestones.',
-      'Built and maintained the Angular platform, delivering engagement and resource-sharing features for an international cohort.',
+      'Coordinated tasks and deadlines with a youth team working across several countries.',
+      'Worked on the Angular platform and its resource-sharing features.',
     ],
   },
   {
     role: 'Software Developer Trainee',
     company: 'District Health Information Software (DHIS2)',
-    period: 'Jul 2025 – Sep 2025',
+    period: 'Jul 2025 - Sep 2025',
     location: 'Dar es Salaam, Tanzania',
     highlights: [
-      'Led design and development of custom DHIS2 Angular modules that streamlined district-level health reporting across facilities.',
-      'Built a Tracker Data Quality Analysis application consuming the DHIS2 REST API and surfacing data-quality issues on a dashboard for staff to resolve.',
+      'Developed Angular modules for DHIS2 district health reporting.',
+      'Built a Tracker Data Quality Analysis app using the DHIS2 REST API to show data issues on a dashboard.',
     ],
   },
   {
     role: 'IT Technician Trainee',
     company: 'Tanzania Revenue Authority (TRA)',
-    period: 'Jul 2024 – Sep 2024',
+    period: 'Jul 2024 - Sep 2024',
     location: 'Dar es Salaam, Tanzania',
     highlights: [
-      'Diagnosed and resolved hardware and software faults across workstations and peripherals, reducing equipment downtime.',
-      'Configured and maintained LAN infrastructure, keeping connectivity stable across the department.',
+      'Diagnosed hardware and software faults on office workstations and peripherals.',
+      'Configured and maintained the department LAN.',
     ],
   },
   {
     role: 'ICT Mentor',
     company: 'Help to Help, TGEE IT Bootcamp',
-    period: 'Mar 2026 – Apr 2026',
+    period: 'Mar 2026 - Apr 2026',
     location: 'Dar es Salaam, Tanzania',
     highlights: [
-      'Delivered structured ICT training on digital literacy, internet safety and introductory programming for youth participants.',
-      'Mentored students individually on academic and career pathways into technology.',
+      'Helped deliver ICT sessions on digital literacy, internet safety, and introductory programming.',
+      'Mentored students on study and career options in technology.',
     ],
   },
 ];
@@ -186,7 +185,7 @@ export const EXPERIENCE: readonly Experience[] = [
 export const SKILL_GROUPS: readonly SkillGroup[] = [
   {
     title: 'Frontend',
-    summary: 'Production interfaces and component architecture',
+    summary: 'Web interfaces and reusable components',
     category: 'engineering',
     skills: [
       { name: 'Angular', level: 90 },
@@ -199,8 +198,8 @@ export const SKILL_GROUPS: readonly SkillGroup[] = [
     ],
   },
   {
-    title: 'Backend & APIs',
-    summary: 'Services, integrations and business logic',
+    title: 'Backend and APIs',
+    summary: 'Server apps, APIs, and integrations',
     category: 'engineering',
     skills: [
       { name: 'Node.js', level: 85 },
@@ -212,8 +211,8 @@ export const SKILL_GROUPS: readonly SkillGroup[] = [
     ],
   },
   {
-    title: 'Data & Databases',
-    summary: 'Schema design, queries and data quality',
+    title: 'Data and Databases',
+    summary: 'Database design, queries, and data checks',
     category: 'data',
     skills: [
       { name: 'PostgreSQL', level: 85 },
@@ -225,8 +224,8 @@ export const SKILL_GROUPS: readonly SkillGroup[] = [
     ],
   },
   {
-    title: 'Infrastructure & Security',
-    summary: 'Deployment, networking and defensive practice',
+    title: 'Infrastructure and Security',
+    summary: 'Servers, networks, and cybersecurity',
     category: 'infrastructure',
     skills: [
       { name: 'Docker', level: 78 },
@@ -238,8 +237,8 @@ export const SKILL_GROUPS: readonly SkillGroup[] = [
     ],
   },
   {
-    title: 'Delivery & Leadership',
-    summary: 'How I work with people and projects',
+    title: 'Delivery and Leadership',
+    summary: 'Planning, communication, and mentoring',
     category: 'product',
     skills: [
       { name: 'Agile Delivery', level: 82 },
@@ -262,9 +261,9 @@ export const PROJECT_FILTERS: readonly ProjectFilter[] = [
 export const PROJECTS: readonly Project[] = [
   {
     title: 'Rishfy',
-    subtitle: 'Ride-sharing platform · Final Year Project',
+    subtitle: 'Ride-sharing platform, final year project',
     description:
-      'A ride-sharing platform for Tanzanian commuters built around the D5 regulatory framework: a service-oriented backend of seven microservices, a Flutter mobile app and a Next.js admin dashboard.',
+      "A final year ride-sharing project for Tanzanian commuters, based on the D5 regulatory framework. The team developed a Flutter app, a Next.js admin dashboard, and a backend with seven services.",
     stack: ['TypeScript', 'Node.js', 'Fastify', 'PostgreSQL', 'PostGIS', 'Redis', 'Kafka', 'Docker'],
     category: ['systems', 'mobile'],
     url: 'https://github.com/godblesskaaya/rishfy',
@@ -273,9 +272,9 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     title: 'Diverse Grow Platform',
-    subtitle: 'Youth Team Up · EU Erasmus+',
+    subtitle: 'Youth Team Up, EU Erasmus+',
     description:
-      'Angular platform connecting farm suppliers, farmers, middlemen, buyers, sellers and transporters across an international youth cohort. Delivered as developer and project manager.',
+      'An Angular platform for people working across the agricultural supply chain. I worked on the platform and coordinated project tasks.',
     stack: ['Angular', 'TypeScript', 'Agile Delivery'],
     category: 'web',
     url: 'https://diverse-grow-vfinal.vercel.app',
@@ -283,9 +282,9 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     title: 'Tracker Data Quality Analysis',
-    subtitle: 'DHIS2 · Field training project',
+    subtitle: 'DHIS2, field training project',
     description:
-      'Angular application connected to the DHIS2 REST API that pulls tracker records from health facilities, checks them for quality issues and surfaces problems on an actionable dashboard.',
+      'An Angular app that checks health facility records through the DHIS2 REST API and displays data quality issues.',
     stack: ['Angular', 'DHIS2 REST API', 'TypeScript'],
     category: 'data',
     linkLabel: 'Enterprise internal tool',
@@ -294,7 +293,7 @@ export const PROJECTS: readonly Project[] = [
     title: 'UniSupport',
     subtitle: 'University support assistant',
     description:
-      'A university support assistant built as a university project. It answers student questions about courses, registration and campus services, trained on university documentation to give fast, accurate responses.',
+      'A university project that answers student questions about courses, registration, and campus services using university documents.',
     stack: ['Python', 'Machine Learning', 'Flask', 'JavaScript'],
     category: 'web',
     url: 'https://unisupport.rejoda.co.tz/',
@@ -317,7 +316,7 @@ export const EDUCATION: readonly Education[] = [
     qualification: 'Bachelor of Science in Computer Science',
     institution: 'University of Dar es Salaam, College of ICT',
     period: 'Graduated 2026',
-    detail: 'Final year project: Rishfy, a service-oriented ride-sharing platform.',
+    detail: 'Final year project: Rishfy, a ride-sharing platform.',
   },
   {
     qualification: 'Advanced Certificate of Secondary Education (A-Level)',
@@ -342,13 +341,13 @@ export const CERTIFICATIONS: readonly Certification[] = [
 ];
 
 export const LEADERSHIP: readonly string[] = [
-  'Imbeju Smart-Elite Ambassador, CRDB Foundation · Feb 2026 – Sep 2026',
-  'Cybersecurity Ambassador, CyberCode Africa · 2026',
+  'Imbeju Smart-Elite Ambassador, CRDB Foundation, Feb 2026 - Sep 2026',
+  'Cybersecurity Ambassador, CyberCode Africa, 2026',
 ];
 
 export const CONTACT_LINKS: readonly ContactLink[] = [
-  { label: 'Email', value: PROFILE.email, href: `mailto:${PROFILE.email}`, icon: 'envelope', title: `Email ${PROFILE.shortName}` },
-  { label: 'WhatsApp', value: PROFILE.whatsappDisplay, href: PROFILE.whatsappHref, icon: 'whatsapp', title: `Message ${PROFILE.shortName} on WhatsApp` },
+  { label: 'Email', value: PROFILE.email, href: `mailto:${PROFILE.email}`, icon: 'envelope', title: `Email ${PROFILE.name}` },
+  { label: 'WhatsApp', value: PROFILE.whatsappDisplay, href: PROFILE.whatsappHref, icon: 'whatsapp', title: `Message ${PROFILE.name} on WhatsApp` },
   { label: 'Phone', value: PROFILE.phone, href: PROFILE.phoneHref, icon: 'phone', title: `Call ${PROFILE.phone}` },
   { label: 'LinkedIn', value: 'fatma-abdallah', href: PROFILE.linkedin, icon: 'linkedin', title: 'LinkedIn profile' },
   { label: 'GitHub', value: 'fatma-nassib', href: PROFILE.github, icon: 'github', title: 'GitHub profile' },

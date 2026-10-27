@@ -12,7 +12,7 @@ import { DOCUMENT } from '@angular/common';
  * Tracks the pointer across a card and writes `--sx` / `--sy` as percentages.
  * `.spotlight` in `styles.css` renders a soft accent sheen at that point.
  *
- * Colour only — no shadow or elevation — so the flat card surfaces stay flat.
+ * Colour only, with no shadow or elevation, so the card surfaces stay flat.
  */
 @Directive({
   selector: '[appSpotlight]',

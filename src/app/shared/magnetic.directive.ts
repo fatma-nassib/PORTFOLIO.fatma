@@ -14,7 +14,7 @@ import { DOCUMENT } from '@angular/common';
  * The offset is written as `--mx` / `--my`; `.magnetic` in `styles.css` turns
  * those into a transform, so nothing here touches layout.
  *
- * Pointer-fine only — on touch there is no cursor to follow.
+ * Pointer-fine only. Touch devices have no cursor to follow.
  */
 @Directive({
   selector: '[appMagnetic]',

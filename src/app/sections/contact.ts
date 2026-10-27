@@ -26,14 +26,13 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
       <app-section-heading
         text="Contact"
         index="07"
-        subtitle="Have a project, a role or a question in mind? Let's talk."
+        subtitle="For software roles and project enquiries."
       />
 
       <div class="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:gap-12">
         <div class="flex flex-col gap-6">
           <p class="max-w-sm text-body leading-relaxed text-muted">
-            The quickest way to reach me is WhatsApp or email. The form opens your
-            email app with everything filled in.
+            Send a message using the form or the contact details.
           </p>
 
           <div appStagger [staggerGap]="60" class="flex flex-col gap-2.5">
@@ -126,11 +125,15 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
           [disabled]="status() === 'sending'"
           class="btn btn-filled mt-2 self-start rounded-full px-7 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {{ status() === 'sending' ? 'Sending…' : 'Send Message' }}
+          {{ status() === 'sending' ? 'Sending message' : 'Send message' }}
+          <app-icon
+            [name]="status() === 'sending' ? 'loader-circle' : 'send'"
+            [sizeClass]="status() === 'sending' ? 'h-4 w-4 animate-spin' : 'h-4 w-4'"
+          />
         </button>
 
         <p class="text-xs text-muted-soft">
-            Messages are delivered by FormSubmit. First use may require a one-time email activation.
+            Messages are delivered by FormSubmit. First use may require email activation.
           </p>
 
         @if (statusMessage()) {
@@ -190,7 +193,7 @@ export class Contact {
     const value = this.form.getRawValue();
 
     this.status.set('sending');
-    this.statusMessage.set('Sending your message…');
+    this.statusMessage.set('Sending message.');
 
     try {
       const response = await fetch(CONTACT_FORM_ENDPOINT, {

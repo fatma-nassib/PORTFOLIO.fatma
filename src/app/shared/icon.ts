@@ -2,13 +2,21 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 import {
   LucideArrowDown,
+  LucideArrowUpRight,
+  LucideAward,
+  LucideBriefcaseBusiness,
+  LucideCircleDot,
   LucideDownload,
+  LucideGraduationCap,
+  LucideLayers,
+  LucideLoaderCircle,
   LucideLink,
   LucideMail,
   LucideMenu,
   LucideMoon,
   LucidePhone,
   LucideSun,
+  LucideSend,
   LucideX,
 } from '@lucide/angular';
 
@@ -21,7 +29,15 @@ export type IconName =
   | 'phone'
   | 'download'
   | 'arrow-down'
+  | 'arrow-up-right'
+  | 'award'
+  | 'briefcase'
+  | 'circle-dot'
   | 'menu'
+  | 'graduation-cap'
+  | 'layers'
+  | 'loader-circle'
+  | 'send'
   | 'close'
   | 'sun'
   | 'moon';
@@ -39,10 +55,18 @@ export type IconName =
     LucidePhone,
     LucideDownload,
     LucideArrowDown,
+    LucideArrowUpRight,
+    LucideAward,
+    LucideBriefcaseBusiness,
+    LucideCircleDot,
     LucideMenu,
     LucideX,
     LucideSun,
     LucideMoon,
+    LucideGraduationCap,
+    LucideLayers,
+    LucideLoaderCircle,
+    LucideSend,
   ],
   template: `
     @switch (name()) {
@@ -81,6 +105,30 @@ export type IconName =
       }
       @case ('arrow-down') {
         <svg lucideArrowDown [class]="sizeClass()" aria-hidden="true" />
+      }
+      @case ('arrow-up-right') {
+        <svg lucideArrowUpRight [class]="sizeClass()" aria-hidden="true" />
+      }
+      @case ('award') {
+        <svg lucideAward [class]="sizeClass()" aria-hidden="true" />
+      }
+      @case ('briefcase') {
+        <svg lucideBriefcaseBusiness [class]="sizeClass()" aria-hidden="true" />
+      }
+      @case ('circle-dot') {
+        <svg lucideCircleDot [class]="sizeClass()" aria-hidden="true" />
+      }
+      @case ('graduation-cap') {
+        <svg lucideGraduationCap [class]="sizeClass()" aria-hidden="true" />
+      }
+      @case ('layers') {
+        <svg lucideLayers [class]="sizeClass()" aria-hidden="true" />
+      }
+      @case ('loader-circle') {
+        <svg lucideLoaderCircle [class]="sizeClass()" aria-hidden="true" />
+      }
+      @case ('send') {
+        <svg lucideSend [class]="sizeClass()" aria-hidden="true" />
       }
       @case ('menu') {
         <svg lucideMenu [class]="sizeClass()" aria-hidden="true" />

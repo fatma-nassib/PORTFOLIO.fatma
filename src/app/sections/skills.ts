@@ -4,10 +4,11 @@ import { SKILL_GROUPS } from '../data/portfolio.data';
 import { SectionHeading } from '../shared/section-heading';
 import { Spotlight } from '../shared/spotlight.directive';
 import { Stagger } from '../shared/stagger.directive';
+import { Icon } from '../shared/icon';
 
 @Component({
   selector: 'app-skills',
-  imports: [SectionHeading, Stagger, Spotlight],
+  imports: [SectionHeading, Stagger, Spotlight, Icon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section id="skills" class="page-section scroll-mt-24">
@@ -20,7 +21,7 @@ import { Stagger } from '../shared/stagger.directive';
                 <h3 class="text-lg font-semibold text-fg transition-colors group-hover:text-accent">{{ group.title }}</h3>
                 <p class="text-[11px] uppercase tracking-[0.18em] text-muted-soft">{{ group.summary }}</p>
               </div>
-              <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/70" aria-hidden="true"></span>
+              <app-icon name="layers" sizeClass="mt-1 h-4 w-4 shrink-0 text-accent" />
             </div>
             <ul class="flex flex-wrap gap-2">
               @for (skill of group.skills; track skill.name) {

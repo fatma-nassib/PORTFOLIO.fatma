@@ -4,10 +4,11 @@ import { EDUCATION, EXPERIENCE, LEADERSHIP } from '../data/portfolio.data';
 import { SectionHeading } from '../shared/section-heading';
 import { Spotlight } from '../shared/spotlight.directive';
 import { Stagger } from '../shared/stagger.directive';
+import { Icon } from '../shared/icon';
 
 @Component({
   selector: 'app-experience',
-  imports: [SectionHeading, Stagger, Spotlight],
+  imports: [SectionHeading, Stagger, Spotlight, Icon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section id="experience" class="page-section">
@@ -16,11 +17,9 @@ import { Stagger } from '../shared/stagger.directive';
       <ol appStagger [staggerGap]="90" class="relative ml-3 border-l border-line-soft">
         @for (job of experience; track job.role + job.company) {
           <li class="group relative ml-6 pb-10 last:pb-0">
-            <span
-              class="absolute -left-[2.05rem] top-1.5 h-3 w-3 rounded-full border-2 border-fg"
-              [class]="job.current ? 'bg-accent' : 'bg-muted-soft'"
-              aria-hidden="true"
-            ></span>
+            <span class="absolute -left-[2.25rem] top-0.5 grid h-5 w-5 place-items-center rounded-full bg-canvas text-accent">
+              <app-icon name="briefcase" sizeClass="h-3.5 w-3.5" />
+            </span>
 
             <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
               <h3 class="text-base font-semibold text-fg transition-colors group-hover:text-accent">{{ job.role }}</h3>
@@ -68,7 +67,7 @@ import { Stagger } from '../shared/stagger.directive';
           <ul class="flex flex-col gap-3 text-sm text-muted">
             @for (item of leadership; track item) {
               <li class="flex gap-2.5">
-                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
+                <app-icon name="award" sizeClass="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                 <span>{{ item }}</span>
               </li>
             }

@@ -64,7 +64,7 @@ import { Magnetic } from '../shared/magnetic.directive';
           <!--
             Fade the portrait into the canvas so the copy stays legible. This is
             a directional wash (transparent over the face, opaque toward the copy
-            edge) and it does NOT respond to scroll — stacking a scroll-driven
+            edge) and it does NOT respond to scroll. Stacking a scroll-driven
             veil on top of it bleached the photo to a ghost.
           -->
           <div
@@ -159,7 +159,7 @@ import { Magnetic } from '../shared/magnetic.directive';
         <!--
           The panel rises inside the pinned stage: it starts a screen below the
           fold and rides up to the bottom edge as progress goes 0 -> 1, covering
-          the photograph. It has to live inside the sticky element — as a
+          the photograph. It has to live inside the sticky element. As a
           sibling it could never overlap the pinned photo, which is why an
           earlier version sat off-screen for the whole handover.
         -->
@@ -173,7 +173,7 @@ import { Magnetic } from '../shared/magnetic.directive';
           -->
           <div class="section-shell flex flex-col gap-5 border-t border-line-strong pb-10 pt-7 md:!pl-32">
             <p class="eyebrow flex items-center gap-2.5 text-muted">
-              <span class="relative inline-block h-1.5 w-1.5 rounded-full bg-accent pulse-dot" aria-hidden="true"></span>
+              <app-icon name="graduation-cap" sizeClass="h-4 w-4" />
               {{ hero.eyebrow }}
             </p>
 
@@ -219,7 +219,7 @@ export class Hero implements OnInit, OnDestroy {
    * The fade has to finish BEFORE the panel arrives, or the two fight: the text
    * dies while the panel is still empty, and you are left staring at a dim hero
    * with a stray hairline at the bottom (exactly what scroll ~280 used to show).
-   * Windows below: copy leaves over 0.50–0.88, panel arrives over 0.45–1.0.
+   * Timing below: copy leaves over 0.50 to 0.88, panel arrives over 0.45 to 1.0.
    */
   protected readonly contentOpacity = computed(() => {
     const p = this.progress();

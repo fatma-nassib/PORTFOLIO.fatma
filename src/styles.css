@@ -485,28 +485,6 @@
     }
   }
 
-  /* Status dot: slow pulse that says "alive" without asking for attention. */
-  .pulse-dot::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 9999px;
-    background: currentColor;
-    animation: pulse-ring 2400ms var(--ease-out-quart) infinite;
-  }
-
-  @keyframes pulse-ring {
-    from {
-      opacity: 0.55;
-      transform: scale(1);
-    }
-
-    to {
-      opacity: 0;
-      transform: scale(2.6);
-    }
-  }
-
   /*
     Magnetic buttons: the directive writes --mx/--my (the cursor offset in px)
     and this moves the element. Kept as transform so it never touches layout.
@@ -523,7 +501,7 @@
 
   /*
     Spotlight: a soft sheen that follows the pointer across a card, driven by
-    --sx/--sy. Colour only — no glow, no shadow, so the flat surface stays flat.
+    --sx/--sy. Colour only, no glow or shadow, so the flat surface stays flat.
   */
   .spotlight {
     position: relative;
@@ -759,7 +737,6 @@
     transform: none;
   }
 
-  .pulse-dot::after,
   .spotlight::before {
     display: none;
   }
