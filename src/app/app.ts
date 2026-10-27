@@ -56,10 +56,10 @@ import { Skills } from './sections/skills';
       [style.display]="showsTopBar() ? null : 'none'"
       (keydown.escape)="menuOpen.set(false)"
     >
-      <div class="section-shell flex items-center justify-between gap-4 py-4">
+      <div class="section-shell flex items-center justify-between gap-2 py-4 sm:gap-4">
         <button
           type="button"
-          class="grid h-11 w-11 place-items-center rounded-[20px] border-current transition hover:opacity-70"
+          class="grid h-11 w-11 shrink-0 place-items-center rounded-[20px] border-current transition hover:opacity-70"
           [attr.aria-expanded]="menuOpen()"
           aria-controls="site-menu"
           aria-label="Toggle navigation"
@@ -71,7 +71,7 @@ import { Skills } from './sections/skills';
         <a
           href="#home"
           (click)="scrollTo('home', $event)"
-          class="screamer text-subheading"
+          class="screamer shrink-0 whitespace-nowrap text-[clamp(1rem,5.4vw,1.375rem)]"
           aria-label="Fatma Nassib Abdallah, back to top"
         >
           {{ name }}

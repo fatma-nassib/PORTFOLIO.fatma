@@ -29,7 +29,7 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
         subtitle="For software roles and project enquiries."
       />
 
-      <div class="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:gap-12">
+      <div class="grid grid-cols-[minmax(0,1fr)] gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:gap-12">
         <div class="flex flex-col gap-6">
           <p class="max-w-sm text-body leading-relaxed text-muted">
             Send a message using the form or the contact details.
@@ -62,7 +62,7 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
       <form
         [formGroup]="form"
         (ngSubmit)="submit()"
-        class="flex w-full flex-col gap-3 rounded-[20px] border border-line-soft p-6 md:p-8"
+        class="flex w-full min-w-0 flex-col gap-3 rounded-[20px] border border-line-soft p-6 md:p-8"
         novalidate
       >
         <label class="sr-only" for="name">Your Name</label>
