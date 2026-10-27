@@ -202,7 +202,7 @@ import { Skills } from './sections/skills';
       <app-contact appReveal />
 
       <footer class="section-shell border-t border-line py-8 text-center text-xs text-fg/60">
-        <p class="screamer size-heading-sm mb-2">{{ name }}</p>
+        <p class="mb-2 text-sm font-medium">{{ name }}</p>
       </footer>
     </main>
 

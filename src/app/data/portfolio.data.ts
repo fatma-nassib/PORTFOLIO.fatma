@@ -86,7 +86,7 @@ export const PROFILE = {
   whatsappHref: 'https://wa.me/255673732464',
   linkedin: 'https://www.linkedin.com/in/fatma-abdallah-21665b277',
   github: 'https://github.com/fatma-nassib',
-  availability: 'Open to graduate roles in software development',
+  availability: 'Open to graduate roles in software development, cybersecurity, and networking',
   /** Relative path to the CV inside `public/` (leading slash = site root). */
   cvFile: '/Fatma_Nassib_Official_CV.pdf',
 } as const;
@@ -112,7 +112,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
 export const HERO = {
   eyebrow: 'BSc Computer Science, University of Dar es Salaam',
   greeting: "I'm Fatma Nassib Abdallah.",
-  roles: 'Computer Science graduate. Web and mobile development.',
+  roles: 'Computer Science graduate. Web and mobile development, cybersecurity, and networking.',
   bio: 'I have worked on web and mobile applications, including Angular modules for a national health information system, backend services, and admin dashboards.',
   /** Light-theme hero: stamped headline broken into fixed lines. */
   headline: ['Building', 'software', 'that carries'],
