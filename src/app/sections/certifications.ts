@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
 
 import { CERTIFICATIONS, type Certification } from '../data/portfolio.data';
 import { SectionHeading } from '../shared/section-heading';
@@ -25,7 +26,7 @@ import { Stagger } from '../shared/stagger.directive';
 
             @if (cert.url) {
               <a
-                [href]="cert.url"
+                [href]="assetUrl(cert.url)"
                 target="_blank"
                 rel="noopener noreferrer"
                 (click)="certificateOpened.emit(cert)"
@@ -44,6 +45,12 @@ import { Stagger } from '../shared/stagger.directive';
   `,
 })
 export class Certifications {
+  private readonly document = inject(DOCUMENT);
+
   protected readonly certifications = CERTIFICATIONS;
   readonly certificateOpened = output<Certification>();
+
+  protected assetUrl(path: string): string {
+    return new URL(path.replace(/^\/+/, ''), this.document.baseURI).href;
+  }
 }

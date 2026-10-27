@@ -93,9 +93,9 @@ export const PROFILE = {
 
 export const IMAGES = {
   /** Hero portrait (served from public/). */
-  hero: '/images/fatma-hero.jpg',
+  hero: 'images/fatma-hero.jpg',
   /** About-section portrait (served from public/). */
-  portrait: '/images/fatma-about.jpg',
+  portrait: 'images/fatma-about.jpg',
 } as const;
 
 export const NAV_ITEMS: readonly NavItem[] = [
