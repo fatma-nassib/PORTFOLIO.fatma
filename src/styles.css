@@ -192,7 +192,21 @@
     @apply inline-flex items-center justify-center gap-2 rounded-[20px] text-body font-medium;
     padding: 14px 24px;
     border: 1px solid var(--color-line-strong);
-    transition: background-color 200ms ease, color 200ms ease, transform 200ms ease;
+    transition:
+      background-color 200ms ease,
+      border-color 200ms ease,
+      color 200ms ease,
+      transform 200ms ease,
+      box-shadow 200ms ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -18px rgb(0 0 0 / 0.55);
+  }
+
+  .btn:active {
+    transform: translateY(0) scale(0.98);
   }
 
   .btn-filled {
@@ -257,6 +271,7 @@
   .card-outline:hover {
     border-color: var(--color-accent);
     box-shadow: 0 18px 40px -30px rgb(0 0 0 / 0.35);
+    transform: translateY(-3px);
   }
 
   .card-violet {
@@ -359,6 +374,32 @@
     gap: 1.25rem;
   }
 
+  app-hero,
+  app-about,
+  app-skills,
+  app-experience,
+  app-projects,
+  app-certifications,
+  app-interests,
+  app-contact {
+    display: block;
+  }
+
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+    transition:
+      opacity 650ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-on-scroll.is-revealed {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: auto;
+  }
+
   @media (width >=1024px) {
     .page-section {
       padding-inline: 2.5rem;
@@ -436,6 +477,10 @@
 
   .side-avatar:hover {
     transform: scale(1.08);
+  }
+
+  .side-avatar:active {
+    transform: scale(0.96);
   }
 
   html[data-theme='light'] .side-avatar {
@@ -522,5 +567,22 @@
 
   html[data-theme='light'] .side-mobile-link.is-active {
     color: var(--color-fg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll,
+  .reveal-on-scroll.is-revealed {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  .btn:hover,
+  .btn:active,
+  .card-outline:hover,
+  .side-avatar:hover,
+  .side-avatar:active {
+    transform: none;
   }
 }

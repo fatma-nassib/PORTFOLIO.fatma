@@ -12,6 +12,7 @@ import { NAV_ITEMS, PROFILE } from './data/portfolio.data';
 import { Icon } from './shared/icon';
 import { ThemeService } from './shared/theme.service';
 import { ThemeToggle } from './shared/theme-toggle';
+import { Reveal } from './shared/reveal.directive';
 import { About } from './sections/about';
 import { Certifications } from './sections/certifications';
 import { Contact } from './sections/contact';
@@ -26,6 +27,7 @@ import { Skills } from './sections/skills';
   imports: [
     Icon,
     ThemeToggle,
+    Reveal,
     Hero,
     About,
     Experience,
@@ -186,14 +188,14 @@ import { Skills } from './sections/skills';
     </header>
 
     <main id="main" class="bg-canvas text-fg" [class.md:pl-28]="!showsTopBar()">
-      <app-hero [theme]="themes.theme()" (cvRequested)="onCvRequested()" />
-      <app-about />
-      <app-skills />
-      <app-experience />
-      <app-projects />
-      <app-certifications (certificateOpened)="onCertificateOpened($event.name)" />
-      <app-interests (interestClicked)="notify('Interest clicked: ' + $event)" />
-      <app-contact />
+      <app-hero appReveal [theme]="themes.theme()" (cvRequested)="onCvRequested()" />
+      <app-about appReveal />
+      <app-skills appReveal />
+      <app-experience appReveal />
+      <app-projects appReveal />
+      <app-certifications appReveal (certificateOpened)="onCertificateOpened($event.name)" />
+      <app-interests appReveal (interestClicked)="notify('Interest clicked: ' + $event)" />
+      <app-contact appReveal />
 
       <footer class="section-shell border-t border-line py-8 text-center text-xs text-fg/60">
         <p class="screamer size-heading-sm mb-2">{{ shortName }}</p>
