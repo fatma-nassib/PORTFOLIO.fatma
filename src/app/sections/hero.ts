@@ -78,30 +78,18 @@ import { Magnetic } from '../shared/magnetic.directive';
             [style.transform]="'translate3d(0,' + -progress() * 9 + 'rem,0)'"
             [style.filter]="blurPx()"
           >
-            <!--
-              Entrance choreography: eyebrow, headline, role line, bio, actions
-              and the scroll hint arrive in sequence (see rise-in). The delays
-              are staggered so the eye travels down the copy.
-            -->
-            <p
-              class="eyebrow rise-in mb-4 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-fg/85"
-              style="--enter-delay: 120ms"
-            >
-              <span class="rule-accent" aria-hidden="true"></span>
-              {{ hero.eyebrow }}
-            </p>
-
+            <!-- The introduction arrives in sequence (see rise-in). -->
             <h1
               id="hero-headline"
               class="screamer rise-in mb-4 text-fg [font-size:clamp(30px,min(9vw,7svh),120px)] md:mb-6"
-              style="--enter-delay: 240ms"
+              style="--enter-delay: 120ms"
             >
               {{ hero.greeting }}
             </h1>
 
             <p
               class="rise-in mb-6 text-caption leading-snug text-fg/90 md:text-body md:text-body-lg"
-              style="--enter-delay: 380ms"
+              style="--enter-delay: 260ms"
             >
               {{ hero.roles }}
             </p>
@@ -110,11 +98,11 @@ import { Magnetic } from '../shared/magnetic.directive';
               <div class="max-w-xl">
                 <p
                   class="rise-in max-w-lg text-caption leading-snug text-fg/90 md:text-body"
-                  style="--enter-delay: 500ms"
+                  style="--enter-delay: 380ms"
                 >
                   {{ hero.bio }}
                 </p>
-                <div class="rise-in mt-5 flex flex-wrap gap-3 md:mt-6" style="--enter-delay: 620ms">
+                <div class="rise-in mt-5 flex flex-wrap gap-3 md:mt-6" style="--enter-delay: 500ms">
                   <a
                     href="#about"
                     appMagnetic
@@ -141,7 +129,7 @@ import { Magnetic } from '../shared/magnetic.directive';
 
               <p
                 class="eyebrow rise-in flex items-center gap-2.5 text-fg/70 md:pb-2"
-                style="--enter-delay: 760ms"
+                style="--enter-delay: 640ms"
               >
                 <span class="rule-accent bg-fg/50" aria-hidden="true"></span>
                 Scroll
@@ -172,11 +160,6 @@ import { Magnetic } from '../shared/magnetic.directive';
             a surface sweeping over the photo rather than a card floating on it.
           -->
           <div class="section-shell flex flex-col gap-5 border-t border-line-strong pb-10 pt-7 md:!pl-32">
-            <p class="eyebrow flex items-center gap-2.5 text-muted">
-              <app-icon name="graduation-cap" sizeClass="h-4 w-4" />
-              {{ hero.eyebrow }}
-            </p>
-
             <p class="screamer size-heading-sm max-w-[26ch] text-fg">
               {{ hero.roles }}
             </p>

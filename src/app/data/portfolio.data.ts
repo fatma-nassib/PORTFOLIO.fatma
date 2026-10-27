@@ -110,7 +110,6 @@ export const NAV_ITEMS: readonly NavItem[] = [
 ];
 
 export const HERO = {
-  eyebrow: 'University of Dar es Salaam, Class of 2026',
   greeting: "I'm Fatma Nassib Abdallah.",
   roles: 'Web and mobile development, cybersecurity, and networking.',
   bio: 'I have worked on web and mobile applications, including Angular modules for a national health information system, backend services, and admin dashboards.',
@@ -120,7 +119,7 @@ export const HERO = {
 } as const;
 
 export const ABOUT_TEXT =
-  'I graduated from the University of Dar es Salaam in 2026. I have worked with Angular and Next.js on web applications, and Node.js, Fastify, and PostgreSQL on backend services. My experience also includes IT support and network maintenance at the Tanzania Revenue Authority, as well as cybersecurity training.';
+  'I graduated in 2026. I have worked with Angular and Next.js on web applications, and Node.js, Fastify, and PostgreSQL on backend services. My experience also includes IT support and network maintenance at the Tanzania Revenue Authority, as well as cybersecurity training.';
 
 export const STATS: readonly Stat[] = [
   { value: '2026', label: 'Graduated' },
@@ -331,12 +330,27 @@ export const EDUCATION: readonly Education[] = [
 ];
 
 export const CERTIFICATIONS: readonly Certification[] = [
-  { name: 'CCNA', issuer: 'University of Dar es Salaam / African Child Projects', issued: 'May 2025', focus: 'infrastructure' },
-  { name: 'Red and Blue Teaming Strategies for Fortified Defense', issuer: 'CyberCode Africa', issued: 'May 2025', focus: 'infrastructure' },
-  { name: 'Digital Privacy and Security Culture', issuer: 'CyberCode Security', issued: 'Dec 2025', focus: 'infrastructure' },
-  { name: 'Social Engineering Defense', issuer: 'CyberCode Security', issued: 'Dec 2025', focus: 'infrastructure' },
-  { name: 'Data Analytics Essentials / Introduction to Data Science', issuer: 'African Child Projects', issued: '2025', focus: 'data' },
-  { name: 'ICT Skills Mentor', issuer: 'Help to Help Foundation', issued: 'Apr 2026', focus: 'product' },
+  { name: 'CCNA: Network Fundamentals', issuer: 'Online course', issued: 'Nov 2024', focus: 'infrastructure', url: '/7610982_78249501732885139769.pdf' },
+  { name: 'Network Technician Career Path Exam', issuer: 'Cisco Networking Academy', issued: 'Aug 2024', focus: 'infrastructure', url: '/Network_Technician_Career_Path_certificate_fattenacious2714-gmail-com_18e19c73-16d2-4eec-8a4f-82f5d8670225.pdf' },
+  { name: 'CCNA: Introduction to Networks', issuer: 'University of Dar es Salaam / Cisco Networking Academy', issued: 'May 2025', focus: 'infrastructure', url: '/_certificate_fattenacious2714-gmail-com_6ba1b7bd-d47f-4802-bab7-dafa4835dbf8.pdf' },
+  { name: 'CCNA: Switching, Routing, and Wireless Essentials', issuer: 'University of Dar es Salaam / Cisco Networking Academy', issued: 'May 2025', focus: 'infrastructure', url: '/_certificate_fattenacious2714-gmail-com_9208da13-ae3f-4118-9cce-a353c5a6e12f.pdf' },
+  { name: 'CCNA: Enterprise Networking, Security, and Automation', issuer: 'University of Dar es Salaam / Cisco Networking Academy', issued: 'May 2025', focus: 'infrastructure', url: '/_certificate_fattenacious2714-gmail-com_238752a0-0a26-46b9-b040-b280bcabc759.pdf' },
+  { name: 'Networking Essentials', issuer: 'African Child Projects / Cisco Networking Academy', issued: 'Apr 2025', focus: 'infrastructure', url: '/Fatma_Nassib%20Abdallah_fattenacious2714%40gmail.com-2.pdf' },
+  { name: 'Introduction to Cybersecurity', issuer: 'African Child Projects / Cisco Networking Academy', issued: 'Dec 2024', focus: 'infrastructure', url: '/Introduction_to_Cybersecurity_certificate_fattenacious2714-gmail-com_6528634a-8c3c-4d68-b1ae-f6bd9b5d0b5d.pdf' },
+  { name: 'Introduction to Cybersecurity', issuer: 'African Child Projects / Cisco Networking Academy', issued: 'Apr 2025', focus: 'infrastructure', url: '/Fatma_Nassib%20Abdallah_fattenacious2714%40gmail.com-1.pdf' },
+  { name: 'Cybersecurity Essentials', issuer: 'African Child Projects / Cisco Networking Academy', issued: 'Apr 2025', focus: 'infrastructure', url: '/Fatma_Nassib%20Abdallah_fattenacious2714%40gmail.com.pdf' },
+  { name: 'Cyber Threat Management', issuer: 'African Child Projects / Cisco Networking Academy', issued: 'Feb 2025', focus: 'infrastructure', url: '/_certificate_fattenacious2714-gmail-com_85e21252-507c-4ad8-97b6-5cb5c99c28a1.pdf' },
+  { name: 'Endpoint Security', issuer: 'African Child Projects / Cisco Networking Academy', issued: 'Jan 2025', focus: 'infrastructure', url: '/_certificate_fattenacious2714-gmail-com_47fc762b-fe13-43d6-9315-365f09d9d05a.pdf' },
+  { name: 'Social Engineering Defense', issuer: 'CyberCode Security', issued: 'Dec 2025', focus: 'infrastructure', url: '/FATMA%20NASSIB%20ABDALLAH%20(copy%201).pdf' },
+  { name: 'Digital Privacy and Security Culture', issuer: 'CyberCode Security', issued: 'Dec 2025', focus: 'infrastructure', url: '/FATMA%20NASSIB%20ABDALLAH.pdf' },
+  { name: 'Red and Blue Teaming Strategies for Fortified Defense', issuer: 'CyberCode Africa', issued: 'May 2025', focus: 'infrastructure', url: '/WhatsApp%20Image%202025-07-08%20at%2010.52.44.jpeg' },
+  { name: 'Data Analytics Essentials', issuer: 'African Child Projects / Cisco Networking Academy', issued: 'Jan 2025', focus: 'data', url: '/_certificate_fattenacious2714-gmail-com_7b0bba82-7067-4b4c-a030-4aa73c38d6e9.pdf' },
+  { name: 'Introduction to Data Science', issuer: 'African Child Projects / Cisco Networking Academy', issued: 'Dec 2024', focus: 'data', url: '/Introduction_to_Data_Science_certificate_fattenacious2714-gmail-com_a8124faf-dd6c-4353-8204-0806dd4bb607.pdf' },
+  { name: 'DHIS2 Online Academy Certificate', issuer: 'DHIS2 Online Academy', issued: '2025', focus: 'engineering', url: '/hisp%20GEN-D001-en%20Certificate%20_%20DHIS2%20Online%20Academy.pdf' },
+  { name: 'Technology Track Mentorship Program', issuer: 'STEMHER Network Tanzania', issued: '2025', focus: 'product', url: '/Fatma%20Abdallah.pdf' },
+  { name: 'Diverse Grow Project Certificate of Attendance', issuer: 'YouthTeamUp', issued: 'Jul 2025', focus: 'product', url: '/4th%20SVE%20certificate_0092.pdf' },
+  { name: 'The Role of AI and Digital Skills for Career Success', issuer: 'Imbeju SmartElite', issued: 'Mar 2026', focus: 'product', url: '/certificate-Fatma-Abdallah-.png' },
+  { name: 'ICT Skills Mentor', issuer: 'Help to Help Foundation', issued: 'Apr 2026', focus: 'product', url: '/FATMA%20NASSIB%20ABDALLAH%20-%20mentor.pdf' },
   { name: 'Web Development Certificate', issuer: 'Power Learn Project (PLP)', issued: '2024', focus: 'engineering' },
 ];
 
