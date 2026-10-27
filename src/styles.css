@@ -15,6 +15,10 @@
   --line-strong: #000;
   --line-soft: rgb(0 0 0 / 0.1);
   --shadow-card: none;
+
+  /* Motion: weighted easings, no spring. */
+  --ease-out-expo: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-out-quart: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 [data-theme='dark'] {
@@ -231,19 +235,32 @@
     color: var(--color-canvas);
   }
 
+  /*
+    Primary hero action. Filled with ink rather than canvas: on the cream page a
+    canvas-filled button is invisible against its own background, which made
+    the primary/secondary pair read as two links.
+  */
   .btn-cream {
-    background: var(--color-canvas);
-    color: var(--color-fg);
-    border-color: var(--color-canvas);
+    background: var(--color-fg);
+    color: var(--color-canvas);
+    border-color: var(--color-fg);
   }
 
   .btn-cream:hover {
     background: var(--color-accent);
     border-color: var(--color-accent);
+    color: var(--color-canvas);
+  }
+
+  [data-theme='dark'] .btn-cream {
+    background: var(--color-canvas);
     color: var(--color-fg);
+    border-color: var(--color-canvas);
   }
 
   [data-theme='dark'] .btn-cream:hover {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
     color: var(--color-ink);
   }
 
@@ -304,6 +321,12 @@
     background: var(--color-canvas);
     color: var(--color-fg);
   }
+
+  /*
+    The panel is anchored to the section, but `main` reserves a column for the
+    fixed side rail, so the panel's own rows apply the matching inset inline
+    (md:!pl-32). Without it the rule and copy slide under the rail.
+  */
 
   /* Dark landing panel keeps the same warm palette as the rest of the site. */
   .dark-hero {
@@ -385,12 +408,16 @@
     display: block;
   }
 
+  /*
+    Reveal: weighted entrance, not a bounce. The easing starts quickly and
+    settles gently, so blocks feel like they have mass rather than snapping.
+  */
   .reveal-on-scroll {
     opacity: 0;
-    transform: translate3d(0, 20px, 0);
+    transform: translate3d(0, 24px, 0);
     transition:
-      opacity 650ms cubic-bezier(0.2, 0.7, 0.2, 1),
-      transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      opacity 750ms var(--ease-out-expo),
+      transform 750ms var(--ease-out-expo);
     will-change: opacity, transform;
   }
 
@@ -398,6 +425,149 @@
     opacity: 1;
     transform: translate3d(0, 0, 0);
     will-change: auto;
+  }
+
+  /*
+    Stagger: children arrive in sequence once their parent is revealed. The
+    delay is set per item from the directive; this only describes the motion.
+  */
+  [data-stagger]>* {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    transition:
+      opacity 550ms var(--ease-out-quart),
+      transform 550ms var(--ease-out-quart);
+  }
+
+  [data-stagger].is-staggered>* {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /*
+    Hero entrance: a one-shot choreography on first paint. The delay is
+    inline (--enter-delay) so the sequence lives with the markup.
+  */
+  .rise-in {
+    animation: rise-in 900ms var(--ease-out-expo) both;
+    animation-delay: var(--enter-delay, 0ms);
+  }
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 26px, 0);
+      filter: blur(6px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      filter: blur(0);
+    }
+  }
+
+  /* The portrait settles out of a slight over-scale as the copy rises. */
+  .settle-in {
+    animation: settle-in 1600ms var(--ease-out-expo) both;
+    animation-delay: var(--enter-delay, 0ms);
+  }
+
+  @keyframes settle-in {
+    from {
+      opacity: 0;
+      transform: scale(1.06);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Status dot: slow pulse that says "alive" without asking for attention. */
+  .pulse-dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: currentColor;
+    animation: pulse-ring 2400ms var(--ease-out-quart) infinite;
+  }
+
+  @keyframes pulse-ring {
+    from {
+      opacity: 0.55;
+      transform: scale(1);
+    }
+
+    to {
+      opacity: 0;
+      transform: scale(2.6);
+    }
+  }
+
+  /*
+    Magnetic buttons: the directive writes --mx/--my (the cursor offset in px)
+    and this moves the element. Kept as transform so it never touches layout.
+  */
+  .magnetic {
+    transform: translate3d(calc(var(--mx, 0) * 1px), calc(var(--my, 0) * 1px), 0);
+    transition: transform 400ms var(--ease-out-expo), background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+    will-change: transform;
+  }
+
+  .magnetic:focus-visible {
+    transform: none;
+  }
+
+  /*
+    Spotlight: a soft sheen that follows the pointer across a card, driven by
+    --sx/--sy. Colour only — no glow, no shadow, so the flat surface stays flat.
+  */
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .spotlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background: radial-gradient(
+      240px circle at var(--sx, 50%) var(--sy, 50%),
+      color-mix(in srgb, var(--color-accent) 12%, transparent),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 400ms var(--ease-out-quart);
+  }
+
+  .spotlight:hover::before {
+    opacity: 1;
+  }
+
+  /* Keep the card's own content above the sheen. */
+  .spotlight > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Underline that draws in from the left on hover, for inline links. */
+  .link-draw {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0 1px;
+    transition: background-size 450ms var(--ease-out-expo), color 200ms ease;
+  }
+
+  .link-draw:hover,
+  .link-draw:focus-visible {
+    background-size: 100% 1px;
   }
 
   @media (width >=1024px) {
@@ -572,10 +742,35 @@
 
 @media (prefers-reduced-motion: reduce) {
   .reveal-on-scroll,
-  .reveal-on-scroll.is-revealed {
+  .reveal-on-scroll.is-revealed,
+  [data-stagger]>*,
+  [data-stagger].is-staggered>* {
     opacity: 1;
     transform: none;
+    transition: none;
     will-change: auto;
+  }
+
+  .rise-in,
+  .settle-in {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+
+  .pulse-dot::after,
+  .spotlight::before {
+    display: none;
+  }
+
+  .magnetic {
+    transform: none;
+    transition: none;
+  }
+
+  .link-draw {
+    transition: none;
   }
 
   .btn:hover,

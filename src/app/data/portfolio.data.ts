@@ -354,5 +354,5 @@ export const CONTACT_LINKS: readonly ContactLink[] = [
   { label: 'GitHub', value: 'fatma-nassib', href: PROFILE.github, icon: 'github', title: 'GitHub profile' },
 ];
 
-/** Optional form endpoint (e.g. Formspree). When empty, the form falls back to email. */
-export const CONTACT_FORM_ENDPOINT = '';
+/** FormSubmit AJAX endpoint; first use requires confirming the activation email. */
+export const CONTACT_FORM_ENDPOINT = `https://formsubmit.co/ajax/${PROFILE.email}`;

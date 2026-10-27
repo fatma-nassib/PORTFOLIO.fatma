@@ -13,12 +13,13 @@ import {
 import { CONTACT_FORM_ENDPOINT, CONTACT_LINKS, PROFILE } from '../data/portfolio.data';
 import { Icon } from '../shared/icon';
 import { SectionHeading } from '../shared/section-heading';
+import { Stagger } from '../shared/stagger.directive';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule, Icon, SectionHeading],
+  imports: [ReactiveFormsModule, Icon, SectionHeading, Stagger],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section id="contact" class="page-section scroll-mt-24">
@@ -35,7 +36,7 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
             email app with everything filled in.
           </p>
 
-          <div class="flex flex-col gap-2.5">
+          <div appStagger [staggerGap]="60" class="flex flex-col gap-2.5">
             @for (link of links; track link.label) {
               <a
                 [href]="link.href"
@@ -109,6 +110,17 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
           <p class="-mt-2 text-left text-xs text-red-400">Please add a message.</p>
         }
 
+        <label class="sr-only" for="website">Leave this field empty</label>
+        <input
+          id="website"
+          name="_honey"
+          type="text"
+          tabindex="-1"
+          autocomplete="off"
+          class="hidden"
+          aria-hidden="true"
+        />
+
         <button
           type="submit"
           [disabled]="status() === 'sending'"
@@ -117,11 +129,9 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
           {{ status() === 'sending' ? 'Sending…' : 'Send Message' }}
         </button>
 
-        @if (!hasEndpoint) {
-          <p class="text-xs text-muted-soft">
-            The form is not connected yet. Your message opens in your email app instead.
+        <p class="text-xs text-muted-soft">
+            Messages are delivered by FormSubmit. First use may require a one-time email activation.
           </p>
-        }
 
         @if (statusMessage()) {
           <p
@@ -133,6 +143,16 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
             {{ statusMessage() }}
           </p>
         }
+
+        @if (status() === 'error') {
+          <button
+            type="button"
+            class="self-start text-sm font-medium text-accent underline underline-offset-4"
+            (click)="openMailFallback()"
+          >
+            Open your email app instead
+          </button>
+        }
       </form>
       </div>
     </section>
@@ -142,7 +162,6 @@ export class Contact {
   private readonly fb = inject(FormBuilder);
 
   protected readonly links = CONTACT_LINKS;
-  protected readonly hasEndpoint = CONTACT_FORM_ENDPOINT.trim().length > 0;
   protected readonly submitted = signal(false);
   protected readonly status = signal<FormStatus>('idle');
   protected readonly statusMessage = signal('');
@@ -158,7 +177,7 @@ export class Contact {
     return control.invalid && (control.touched || this.submitted());
   }
 
-  protected submit(): void {
+  protected async submit(): Promise<void> {
     this.submitted.set(true);
 
     if (this.form.invalid) {
@@ -170,39 +189,52 @@ export class Contact {
 
     const value = this.form.getRawValue();
 
-    if (!this.hasEndpoint) {
-      this.openMailFallback(value);
-      return;
-    }
-
     this.status.set('sending');
     this.statusMessage.set('Sending your message…');
 
-    fetch(CONTACT_FORM_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(value),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Request failed with ${response.status}`);
-        }
-        this.status.set('success');
-        this.statusMessage.set(`Thanks ${value.name}! Your message has been sent.`);
-        this.form.reset();
-        this.submitted.set(false);
-      })
-      .catch(() => {
-        this.status.set('error');
-        this.statusMessage.set('Could not send your message. Please email me directly instead.');
+    try {
+      const response = await fetch(CONTACT_FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          ...value,
+          _subject: `Portfolio enquiry from ${value.name}`,
+          _honey: '',
+        }),
       });
+
+      if (!response.ok) {
+        throw new Error(`FormSubmit returned HTTP ${response.status}.`);
+      }
+
+      const result: unknown = await response.json();
+      if (
+        typeof result !== 'object' ||
+        result === null ||
+        !('success' in result) ||
+        (result.success !== true && result.success !== 'true')
+      ) {
+        throw new Error('FormSubmit did not confirm the submission.');
+      }
+
+      this.status.set('success');
+      this.statusMessage.set(`Thanks ${value.name}! Your message was submitted.`);
+      this.form.reset();
+      this.submitted.set(false);
+    } catch (error) {
+      console.error('Contact form submission failed.', error);
+      this.status.set('error');
+      this.statusMessage.set(
+        'Your message could not be submitted. Please try again or use the email app fallback.',
+      );
+    }
   }
 
-  private openMailFallback(value: { name: string; email: string; message: string }): void {
+  protected openMailFallback(): void {
+    const value = this.form.getRawValue();
     const subject = encodeURIComponent(`Portfolio enquiry from ${value.name}`);
-    const body = encodeURIComponent(`${value.message}\n\n, ${value.name} (${value.email})`);
+    const body = encodeURIComponent(`${value.message}\n\nFrom: ${value.name} (${value.email})`);
     window.location.href = `mailto:${PROFILE.email}?subject=${subject}&body=${body}`;
-    this.status.set('success');
-    this.statusMessage.set(`Opening your email app to send this to ${PROFILE.email}.`);
+    this.statusMessage.set(`Opening your email app to contact ${PROFILE.email}.`);
   }
 }

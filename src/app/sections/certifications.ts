@@ -2,10 +2,12 @@ import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 
 import { CERTIFICATIONS, type Certification } from '../data/portfolio.data';
 import { SectionHeading } from '../shared/section-heading';
+import { Spotlight } from '../shared/spotlight.directive';
+import { Stagger } from '../shared/stagger.directive';
 
 @Component({
   selector: 'app-certifications',
-  imports: [SectionHeading],
+  imports: [SectionHeading, Stagger, Spotlight],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section
@@ -14,9 +16,9 @@ import { SectionHeading } from '../shared/section-heading';
     >
       <app-section-heading text="Certifications" index="05" subtitle="Credentials and programmes completed." />
 
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div appStagger [staggerGap]="60" [staggerMax]="420" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         @for (cert of certifications; track cert.name) {
-          <article class="card-outline group flex flex-col p-6">
+          <article appSpotlight class="card-outline group flex flex-col p-6">
             <h3 class="text-base font-semibold leading-snug text-fg">{{ cert.name }}</h3>
             <p class="mt-2 text-sm text-muted">{{ cert.issuer }}</p>
             <p class="mt-1 text-xs uppercase tracking-[0.14em] text-muted-soft">Issued {{ cert.issued }}</p>

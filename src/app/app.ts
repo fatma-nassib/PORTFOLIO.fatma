@@ -13,6 +13,7 @@ import { Icon } from './shared/icon';
 import { ThemeService } from './shared/theme.service';
 import { ThemeToggle } from './shared/theme-toggle';
 import { Reveal } from './shared/reveal.directive';
+import { Magnetic } from './shared/magnetic.directive';
 import { About } from './sections/about';
 import { Certifications } from './sections/certifications';
 import { Contact } from './sections/contact';
@@ -28,6 +29,7 @@ import { Skills } from './sections/skills';
     Icon,
     ThemeToggle,
     Reveal,
+    Magnetic,
     Hero,
     About,
     Experience,
@@ -79,10 +81,13 @@ import { Skills } from './sections/skills';
           <app-theme-toggle />
           <a
             href="#contact"
+            appMagnetic
+            [magneticStrength]="4"
             (click)="scrollTo('contact', $event)"
-            class="btn hidden px-5 py-2.5 text-caption sm:inline-flex"
-            [class]="pastHero() ? 'btn-ghost' : 'btn-ghost'"
+            class="btn btn-ghost hidden px-5 py-2.5 text-caption sm:inline-flex"
           >
+            <!-- Accent dot: the single "live" signal in the chrome. -->
+            <span class="relative inline-block h-1.5 w-1.5 rounded-full bg-accent pulse-dot" aria-hidden="true"></span>
             Get in touch
           </a>
         </div>
@@ -207,7 +212,7 @@ import { Skills } from './sections/skills';
     <div class="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2">
       @if (toast()) {
         <div
-          class="rounded-[20px] border-fg bg-fg px-5 py-2.5 text-body text-canvas"
+          class="rise-in rounded-[20px] border-fg bg-fg px-5 py-2.5 text-body text-canvas"
           role="status"
         >
           {{ toast() }}

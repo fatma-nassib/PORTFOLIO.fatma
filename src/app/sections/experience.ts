@@ -2,16 +2,18 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { EDUCATION, EXPERIENCE, LEADERSHIP } from '../data/portfolio.data';
 import { SectionHeading } from '../shared/section-heading';
+import { Spotlight } from '../shared/spotlight.directive';
+import { Stagger } from '../shared/stagger.directive';
 
 @Component({
   selector: 'app-experience',
-  imports: [SectionHeading],
+  imports: [SectionHeading, Stagger, Spotlight],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section id="experience" class="page-section">
       <app-section-heading text="Experience" index="03" subtitle="Roles, education and commitments." />
 
-      <ol class="relative ml-3 border-l border-line-soft">
+      <ol appStagger [staggerGap]="90" class="relative ml-3 border-l border-line-soft">
         @for (job of experience; track job.role + job.company) {
           <li class="group relative ml-6 pb-10 last:pb-0">
             <span
@@ -42,8 +44,8 @@ import { SectionHeading } from '../shared/section-heading';
         }
       </ol>
 
-      <div class="mt-8 grid gap-5 md:grid-cols-2">
-        <div class="card-outline p-6">
+      <div appStagger [staggerGap]="120" class="mt-8 grid gap-5 md:grid-cols-2">
+        <div appSpotlight class="card-outline p-6">
           <h3 class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-muted-soft">Education</h3>
           <ul class="flex flex-col gap-5">
             @for (entry of education; track entry.qualification) {
@@ -61,7 +63,7 @@ import { SectionHeading } from '../shared/section-heading';
           </ul>
         </div>
 
-        <div class="card-outline p-6">
+        <div appSpotlight class="card-outline p-6">
           <h3 class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-muted-soft">Leadership</h3>
           <ul class="flex flex-col gap-3 text-sm text-muted">
             @for (item of leadership; track item) {

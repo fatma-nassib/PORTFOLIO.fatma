@@ -13,12 +13,14 @@ import {
 } from '../data/portfolio.data';
 import { Icon } from '../shared/icon';
 import { SectionHeading } from '../shared/section-heading';
+import { Spotlight } from '../shared/spotlight.directive';
+import { Stagger } from '../shared/stagger.directive';
 
 type ProjectFilter = ProjectCategory | 'all';
 
 @Component({
   selector: 'app-projects',
-  imports: [Icon, SectionHeading],
+  imports: [Icon, SectionHeading, Stagger, Spotlight],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section id="projects" class="page-section scroll-mt-24">
@@ -31,7 +33,7 @@ type ProjectFilter = ProjectCategory | 'all';
             role="tab"
             [attr.aria-selected]="activeFilter() === filter.value"
             (click)="activeFilter.set(filter.value)"
-            class="rounded-[20px] border px-4 py-2 text-sm transition-colors duration-200"
+            class="rounded-[20px] border px-4 py-2 text-sm transition-[color,background-color,border-color,transform] duration-200 ease-[var(--ease-out-quart)] active:scale-[0.97]"
             [class]="
               activeFilter() === filter.value
                 ? 'border-fg bg-fg text-canvas'
@@ -43,9 +45,14 @@ type ProjectFilter = ProjectCategory | 'all';
         }
       </div>
 
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Keyed on the filter so switching tabs replays the sequence. -->
+      <div
+        [attr.data-filter]="activeFilter()"
+        class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+      >
         @for (project of visibleProjects(); track project.title) {
           <article
+            appSpotlight
             class="group relative flex flex-col rounded-2xl border border-line-soft p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_24px_48px_-36px_rgba(0,0,0,0.5)]"
           >
             <div class="flex items-start justify-between gap-3">
@@ -76,7 +83,7 @@ type ProjectFilter = ProjectCategory | 'all';
                   [href]="project.url"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-fg"
+                  class="link-draw inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-fg"
                 >
                   {{ project.linkLabel }}
                   <app-icon
