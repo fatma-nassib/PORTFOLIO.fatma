@@ -8,13 +8,16 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   selector: 'app-section-heading',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="flex flex-col gap-6 border-t border-hillside-ink pt-5 md:gap-8">
+    <div class="flex flex-col gap-6 border-t border-line pt-5 md:gap-8">
       <div class="flex items-baseline justify-between gap-6">
         @if (index()) {
           <p class="eyebrow text-muted/60">{{ index() }}</p>
         }
         @if (eyebrow()) {
-          <p class="eyebrow text-muted/60">{{ eyebrow() }}</p>
+          <p class="eyebrow flex items-center gap-2.5 text-muted/60">
+            <span class="rule-accent" aria-hidden="true"></span>
+            {{ eyebrow() }}
+          </p>
         }
       </div>
 

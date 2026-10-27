@@ -10,18 +10,16 @@ import { SectionHeading } from '../shared/section-heading';
   template: `
     <section
       id="certifications"
-      class="mx-auto max-w-6xl scroll-mt-24 px-6 py-20 lg:px-10"
+      class="page-section scroll-mt-24"
     >
-      <app-section-heading text="Certifications" />
+      <app-section-heading text="Certifications" index="05" subtitle="Credentials and programmes completed." />
 
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         @for (cert of certifications; track cert.name) {
-          <article
-            class="flex flex-col rounded-2xl border border-line bg-surface/5 p-6 transition-colors hover:border-accent"
-          >
+          <article class="card-outline group flex flex-col p-6">
             <h3 class="text-base font-semibold leading-snug text-fg">{{ cert.name }}</h3>
             <p class="mt-2 text-sm text-muted">{{ cert.issuer }}</p>
-            <p class="mt-1 text-xs text-muted-soft">Issued: {{ cert.issued }}</p>
+            <p class="mt-1 text-xs uppercase tracking-[0.14em] text-muted-soft">Issued {{ cert.issued }}</p>
 
             @if (cert.url) {
               <a
@@ -29,7 +27,7 @@ import { SectionHeading } from '../shared/section-heading';
                 target="_blank"
                 rel="noopener noreferrer"
                 (click)="certificateOpened.emit(cert)"
-                class="mt-auto inline-block pt-4 text-sm font-medium text-accent transition hover:text-accent hover:underline"
+                class="mt-auto inline-block pt-4 text-sm font-medium text-accent transition-colors hover:text-fg"
               >
                 View Certificate
                 <span class="sr-only">(opens in a new tab)</span>
@@ -38,7 +36,7 @@ import { SectionHeading } from '../shared/section-heading';
               <button
                 type="button"
                 (click)="certificateOpened.emit(cert)"
-                class="mt-auto inline-block pt-4 text-left text-sm font-medium text-accent transition hover:text-accent hover:underline"
+                class="mt-auto inline-block pt-4 text-left text-sm font-medium text-accent transition-colors hover:text-fg"
               >
                 View Certificate
               </button>

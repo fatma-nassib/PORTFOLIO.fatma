@@ -67,7 +67,7 @@ export type ContactLink = {
   readonly label: string;
   readonly value: string;
   readonly href: string;
-  readonly icon: 'envelope' | 'github' | 'linkedin' | 'phone';
+  readonly icon: 'envelope' | 'github' | 'linkedin' | 'whatsapp' | 'phone';
   /** Tooltip and accessible name for the icon-only link. */
   readonly title: string;
 };
@@ -81,8 +81,12 @@ export const PROFILE = {
   email: 'abdallah.nassib.fatma@gmail.com',
   phone: '+255 616 432 464',
   phoneHref: 'tel:+255616432464',
+  /** WhatsApp number in international format (digits only, no `+`). */
+  whatsapp: '255673732464',
+  whatsappDisplay: '+255 673 732 464',
+  whatsappHref: 'https://wa.me/255673732464',
   linkedin: 'https://www.linkedin.com/in/fatma-abdallah-21665b277',
-  github: 'https://github.com/2023-04-00047',
+  github: 'https://github.com/fatma-nassib',
   availability: 'Open to graduate and junior engineering roles',
   /** Relative path to the CV inside `public/` (leading slash = site root). */
   cvFile: '/Fatma_Nassib_Official_CV.pdf',
@@ -344,9 +348,10 @@ export const LEADERSHIP: readonly string[] = [
 
 export const CONTACT_LINKS: readonly ContactLink[] = [
   { label: 'Email', value: PROFILE.email, href: `mailto:${PROFILE.email}`, icon: 'envelope', title: `Email ${PROFILE.shortName}` },
+  { label: 'WhatsApp', value: PROFILE.whatsappDisplay, href: PROFILE.whatsappHref, icon: 'whatsapp', title: `Message ${PROFILE.shortName} on WhatsApp` },
   { label: 'Phone', value: PROFILE.phone, href: PROFILE.phoneHref, icon: 'phone', title: `Call ${PROFILE.phone}` },
   { label: 'LinkedIn', value: 'fatma-abdallah', href: PROFILE.linkedin, icon: 'linkedin', title: 'LinkedIn profile' },
-  { label: 'GitHub', value: '2023-04-00047', href: PROFILE.github, icon: 'github', title: 'GitHub profile' },
+  { label: 'GitHub', value: 'fatma-nassib', href: PROFILE.github, icon: 'github', title: 'GitHub profile' },
 ];
 
 /** Optional form endpoint (e.g. Formspree). When empty, the form falls back to email. */

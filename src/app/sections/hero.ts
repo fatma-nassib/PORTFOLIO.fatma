@@ -55,8 +55,8 @@ import { Icon } from '../shared/icon';
             [style.opacity]="contentOpacity()"
             [style.transform]="'translate3d(0,' + -progress() * 6 + 'rem,0)'"
           >
-            <p class="eyebrow mb-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-fg/85">
-              <span class="h-1.5 w-1.5 rounded-full bg-fg" aria-hidden="true"></span>
+            <p class="eyebrow mb-4 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-fg/85">
+              <span class="rule-accent" aria-hidden="true"></span>
               {{ hero.eyebrow }}
             </p>
 
@@ -75,13 +75,13 @@ import { Icon } from '../shared/icon';
               <div class="max-w-xl">
                 <p class="max-w-lg text-caption leading-snug text-fg/90 md:text-body">{{ hero.bio }}</p>
                 <div class="mt-5 flex flex-wrap gap-3 md:mt-6">
-                  <a href="#about" class="btn btn-cream px-5 py-3 text-caption md:text-body">
-                    See the work
-                    <app-icon name="arrow-down" sizeClass="h-4 w-4" />
+                  <a href="#about" class="btn btn-cream group/cta px-5 py-3 text-caption md:text-body">
+                    See more
+                    <app-icon name="arrow-down" sizeClass="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-y-0.5" />
                   </a>
                   <button
                     type="button"
-                    class="btn btn-ghost px-5 py-3 text-caption md:text-body"
+                    class="btn btn-glass px-5 py-3 text-caption md:text-body"
                     (click)="cvRequested.emit()"
                     [attr.aria-disabled]="!hasCv"
                     [title]="hasCv ? 'Download my CV' : 'CV coming soon'"
@@ -92,8 +92,8 @@ import { Icon } from '../shared/icon';
                 </div>
               </div>
 
-              <p class="eyebrow flex items-center gap-2 text-fg/80 md:pb-2">
-                <span class="inline-block h-1.5 w-1.5 rounded-full bg-fg/70" aria-hidden="true"></span>
+              <p class="eyebrow flex items-center gap-2.5 text-fg/70 md:pb-2">
+                <span class="rule-accent bg-fg/50" aria-hidden="true"></span>
                 Scroll
               </p>
             </div>

@@ -8,10 +8,10 @@ import { SectionHeading } from '../shared/section-heading';
   imports: [SectionHeading],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <section id="experience" class="mx-auto max-w-6xl px-6 py-20 lg:px-10">
-      <app-section-heading text="Experience" subtitle="Roles, education and commitments." />
+    <section id="experience" class="page-section">
+      <app-section-heading text="Experience" index="03" subtitle="Roles, education and commitments." />
 
-      <ol class="relative ml-3 border-l border-line">
+      <ol class="relative ml-3 border-l border-line-soft">
         @for (job of experience; track job.role + job.company) {
           <li class="group relative ml-6 pb-10 last:pb-0">
             <span
@@ -29,15 +29,21 @@ import { SectionHeading } from '../shared/section-heading';
 
             <ul class="mt-3 flex flex-col gap-1.5 pl-4 text-sm text-muted">
               @for (highlight of job.highlights; track highlight) {
-                <li class="transition-colors hover:text-accent">{{ highlight }}</li>
+                <li class="relative transition-colors hover:text-accent">
+                  <span
+                    class="absolute -left-4 top-[0.6em] h-px w-2 bg-line-strong"
+                    aria-hidden="true"
+                  ></span>
+                  {{ highlight }}
+                </li>
               }
             </ul>
           </li>
         }
       </ol>
 
-      <div class="mt-6 grid gap-6 md:grid-cols-2">
-        <div class="card p-6">
+      <div class="mt-8 grid gap-5 md:grid-cols-2">
+        <div class="card-outline p-6">
           <h3 class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-muted-soft">Education</h3>
           <ul class="flex flex-col gap-5">
             @for (entry of education; track entry.qualification) {
@@ -55,7 +61,7 @@ import { SectionHeading } from '../shared/section-heading';
           </ul>
         </div>
 
-        <div class="card p-6">
+        <div class="card-outline p-6">
           <h3 class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-muted-soft">Leadership</h3>
           <ul class="flex flex-col gap-3 text-sm text-muted">
             @for (item of leadership; track item) {

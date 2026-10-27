@@ -21,21 +21,21 @@ type ProjectFilter = ProjectCategory | 'all';
   imports: [Icon, SectionHeading],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <section id="projects" class="mx-auto max-w-6xl scroll-mt-24 px-6 py-20 lg:px-10">
-      <app-section-heading text="Projects" />
+    <section id="projects" class="page-section scroll-mt-24">
+      <app-section-heading text="Projects" index="04" subtitle="Selected work across web, mobile and data." />
 
-      <div class="mb-8 flex flex-wrap gap-3" role="tablist" aria-label="Project categories">
+      <div class="mb-8 flex flex-wrap gap-2" role="tablist" aria-label="Project categories">
         @for (filter of filters; track filter.value) {
           <button
             type="button"
             role="tab"
             [attr.aria-selected]="activeFilter() === filter.value"
             (click)="activeFilter.set(filter.value)"
-            class="rounded-md border px-4 py-2 text-sm transition"
+            class="rounded-[20px] border px-4 py-2 text-sm transition-colors duration-200"
             [class]="
               activeFilter() === filter.value
-                ? 'border-accent bg-accent text-canvas font-semibold'
-                : 'border-line text-fg/80 hover:border-accent hover:text-accent'
+                ? 'border-fg bg-fg text-canvas'
+                : 'border-line-soft text-muted hover:border-line-strong hover:text-fg'
             "
           >
             {{ filter.label }}
@@ -43,18 +43,18 @@ type ProjectFilter = ProjectCategory | 'all';
         }
       </div>
 
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         @for (project of visibleProjects(); track project.title) {
           <article
-            class="group relative flex flex-col rounded-2xl border border-line bg-surface p-6 transition-colors hover:border-accent/60"
+            class="group relative flex flex-col rounded-2xl border border-line-soft p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_24px_48px_-36px_rgba(0,0,0,0.5)]"
           >
             <div class="flex items-start justify-between gap-3">
               <div>
                 <h3 class="text-base font-semibold text-fg">{{ project.title }}</h3>
-                <p class="mt-1 text-xs text-accent">{{ project.subtitle }}</p>
+                <p class="mt-1 text-[11px] uppercase tracking-[0.12em] text-accent/90">{{ project.subtitle }}</p>
               </div>
               @if (project.featured) {
-                <span class="shrink-0 rounded-full border border-accent/40 px-2 py-0.5 text-[10px] uppercase tracking-wider text-accent">
+                <span class="shrink-0 rounded-full bg-surface px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-muted">
                   Featured
                 </span>
               }
@@ -64,7 +64,7 @@ type ProjectFilter = ProjectCategory | 'all';
 
             <ul class="mt-5 flex flex-wrap gap-1.5" aria-label="Tech stack">
               @for (tech of project.stack; track tech) {
-                <li class="rounded-md bg-surface/5 px-2 py-1 font-mono text-[11px] text-muted-soft">
+                <li class="tag px-2 py-0.5 font-mono text-[11px] text-muted-soft">
                   {{ tech }}
                 </li>
               }
@@ -76,15 +76,18 @@ type ProjectFilter = ProjectCategory | 'all';
                   [href]="project.url"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition hover:underline"
+                  class="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-fg"
                 >
                   {{ project.linkLabel }}
-                  <app-icon name="link" sizeClass="h-4 w-4" />
+                  <app-icon
+                    name="link"
+                    sizeClass="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
                   <span class="sr-only">(opens in a new tab)</span>
                 </a>
               } @else {
                 <p class="inline-flex items-center gap-2 text-sm text-muted-soft">
-                  <span class="h-1.5 w-1.5 rounded-full bg-muted-soft" aria-hidden="true"></span>
+                  <span class="h-1.5 w-1.5 rounded-full border border-muted-soft" aria-hidden="true"></span>
                   {{ project.linkLabel }}
                 </p>
               }
@@ -108,11 +111,11 @@ export class Projects {
     return filter === 'all'
       ? PROJECTS
       : PROJECTS.filter((project) => {
-          const categories = Array.isArray(project.category)
-            ? project.category
-            : [project.category];
-          return categories.includes(filter);
-        });
+        const categories = Array.isArray(project.category)
+          ? project.category
+          : [project.category];
+        return categories.includes(filter);
+      });
   });
 
   protected categoryLabel(category: ProjectCategory): string {

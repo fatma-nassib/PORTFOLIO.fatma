@@ -13,6 +13,7 @@
   --muted-soft: rgb(0 0 0 / 0.35);
   --line: rgb(0 0 0 / 0.2);
   --line-strong: #000;
+  --line-soft: rgb(0 0 0 / 0.1);
   --shadow-card: none;
 }
 
@@ -26,6 +27,7 @@
   --muted-soft: #918a7e;
   --line: rgb(255 255 255 / 0.1);
   --line-strong: rgb(255 255 255 / 0.18);
+  --line-soft: rgb(255 255 255 / 0.06);
   --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 18px 40px -24px rgb(0 0 0 / 0.45);
 }
 
@@ -37,6 +39,7 @@
   --color-muted: var(--muted);
   --color-muted-soft: var(--muted-soft);
   --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
   --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
 
@@ -230,11 +233,30 @@
     color: var(--color-ink);
   }
 
+  /* Ghost button on the hero photograph: a soft glass chip rather than a hard outline. */
+  .btn-glass {
+    background: var(--color-canvas);
+    border-color: var(--color-line-strong);
+    color: var(--color-fg);
+  }
+
+  .btn-glass:hover {
+    background: var(--color-fg);
+    border-color: var(--color-fg);
+    color: var(--color-canvas);
+  }
+
   .card-outline {
     @apply rounded-[20px];
     background: var(--color-canvas);
-    border: 1px solid var(--color-line-strong);
+    border: 1px solid var(--color-line-soft);
     padding: 24px;
+    transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  }
+
+  .card-outline:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 18px 40px -30px rgb(0 0 0 / 0.35);
   }
 
   .card-violet {
@@ -295,18 +317,52 @@
 
   .tag {
     @apply inline-flex items-center rounded-[20px] px-3 py-1;
-    border: 1px solid var(--color-line-strong);
+    border: 1px solid var(--color-line-soft);
     font-size: 14px;
     line-height: 1.2;
     letter-spacing: -0.14px;
   }
 
   .rule {
-    border-top: 1px solid var(--color-line-strong);
+    border-top: 1px solid var(--color-line-soft);
+  }
+
+  /* Short rule that sits beside an eyebrow label. */
+  .rule-accent {
+    display: inline-block;
+    width: 2.5rem;
+    height: 1px;
+    background: var(--color-accent);
+    vertical-align: middle;
   }
 
   .section-shell {
     padding-inline: clamp(20px, 5vw, 64px);
+  }
+
+  /*
+    One page rhythm for every section: the heading supplies the top rule, so the
+    section only needs the gap beneath it and consistent outer spacing.
+  */
+  .page-section {
+    @apply mx-auto max-w-6xl;
+    padding-inline: 1.5rem;
+    padding-block: clamp(4rem, 9vw, 7.5rem);
+  }
+
+  .page-section > * + * {
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  /* Tighten the lockup's own rhythm; the section supplies the gaps between blocks. */
+  .page-section app-section-heading > div {
+    gap: 1.25rem;
+  }
+
+  @media (width >=1024px) {
+    .page-section {
+      padding-inline: 2.5rem;
+    }
   }
 
   .inline-photo {
@@ -332,7 +388,7 @@
 
   .card {
     @apply rounded-xl;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-line-soft);
     background: rgb(255 255 255 / 0.03);
     box-shadow: var(--shadow-card);
   }

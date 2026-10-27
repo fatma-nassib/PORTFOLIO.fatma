@@ -21,15 +21,48 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
   imports: [ReactiveFormsModule, Icon, SectionHeading],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <section id="contact" class="mx-auto max-w-6xl scroll-mt-24 px-6 py-20 lg:px-10">
-      <div class="flex flex-col items-center text-center">
-        <app-section-heading text="Contact" subtitle="Let’s collaborate! Fill out the form below." />
-      </div>
+    <section id="contact" class="page-section scroll-mt-24">
+      <app-section-heading
+        text="Contact"
+        index="07"
+        subtitle="Have a project, a role or a question in mind? Let's talk."
+      />
+
+      <div class="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:gap-12">
+        <div class="flex flex-col gap-6">
+          <p class="max-w-sm text-body leading-relaxed text-muted">
+            The quickest way to reach me is WhatsApp or email. The form opens your
+            email app with everything filled in.
+          </p>
+
+          <div class="flex flex-col gap-2.5">
+            @for (link of links; track link.label) {
+              <a
+                [href]="link.href"
+                [title]="link.title"
+                [attr.aria-label]="link.title"
+                [attr.target]="link.href.startsWith('http') ? '_blank' : null"
+                [attr.rel]="link.href.startsWith('http') ? 'noopener noreferrer' : null"
+                class="group flex items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 text-sm text-muted transition-colors duration-200 hover:border-line-soft hover:bg-surface/40 hover:text-fg"
+              >
+                <span
+                  class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line-soft text-fg transition-colors duration-200 group-hover:border-accent/60 group-hover:text-accent"
+                >
+                  <app-icon [name]="link.icon" sizeClass="h-4 w-4" />
+                </span>
+                <span class="flex min-w-0 flex-col">
+                  <span class="text-[10px] uppercase tracking-[0.18em] text-muted-soft">{{ link.label }}</span>
+                  <span class="truncate text-sm text-fg/90">{{ link.value }}</span>
+                </span>
+              </a>
+            }
+          </div>
+        </div>
 
       <form
         [formGroup]="form"
         (ngSubmit)="submit()"
-        class="mx-auto flex w-full max-w-xl flex-col gap-4"
+        class="flex w-full flex-col gap-3 rounded-[20px] border border-line-soft p-6 md:p-8"
         novalidate
       >
         <label class="sr-only" for="name">Your Name</label>
@@ -39,8 +72,8 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
           formControlName="name"
           placeholder="Your Name"
           autocomplete="name"
-          class="w-full rounded-lg border bg-surface/5 px-4 py-3 text-sm text-fg/90 placeholder:text-muted-soft transition focus:border-accent focus:outline-none"
-          [class.border-accent]="!showError('name')"
+          class="w-full rounded-xl border bg-transparent px-4 py-3 text-sm text-fg/90 placeholder:text-muted-soft transition focus:border-accent focus:outline-none"
+          [class.border-line-soft]="!showError('name')"
           [class.border-red-400]="showError('name')"
         />
         @if (showError('name')) {
@@ -54,8 +87,8 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
           formControlName="email"
           placeholder="Your Email"
           autocomplete="email"
-          class="w-full rounded-lg border bg-surface/5 px-4 py-3 text-sm text-fg/90 placeholder:text-muted-soft transition focus:border-accent focus:outline-none"
-          [class.border-accent]="!showError('email')"
+          class="w-full rounded-xl border bg-transparent px-4 py-3 text-sm text-fg/90 placeholder:text-muted-soft transition focus:border-accent focus:outline-none"
+          [class.border-line-soft]="!showError('email')"
           [class.border-red-400]="showError('email')"
         />
         @if (showError('email')) {
@@ -68,8 +101,8 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
           rows="4"
           formControlName="message"
           placeholder="Your Message"
-          class="w-full resize-y rounded-lg border bg-surface/5 px-4 py-3 text-sm text-fg/90 placeholder:text-muted-soft transition focus:border-accent focus:outline-none"
-          [class.border-accent]="!showError('message')"
+          class="w-full resize-y rounded-xl border bg-transparent px-4 py-3 text-sm text-fg/90 placeholder:text-muted-soft transition focus:border-accent focus:outline-none"
+          [class.border-line-soft]="!showError('message')"
           [class.border-red-400]="showError('message')"
         ></textarea>
         @if (showError('message')) {
@@ -79,20 +112,20 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
         <button
           type="submit"
           [disabled]="status() === 'sending'"
-          class="btn btn-filled self-center rounded-full px-8 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
+          class="btn btn-filled mt-2 self-start rounded-full px-7 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
         >
           {{ status() === 'sending' ? 'Sending…' : 'Send Message' }}
         </button>
 
         @if (!hasEndpoint) {
-          <p class="text-center text-xs text-muted-soft">
+          <p class="text-xs text-muted-soft">
             The form is not connected yet. Your message opens in your email app instead.
           </p>
         }
 
         @if (statusMessage()) {
           <p
-            class="text-center text-sm"
+            class="text-sm"
             [class.text-accent]="status() === 'success'"
             [class.text-red-400]="status() === 'error'"
             role="status"
@@ -101,22 +134,6 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error';
           </p>
         }
       </form>
-
-      <p class="mt-14 text-center text-muted-soft">Or reach out via email or social media.</p>
-
-      <div class="mt-6 flex justify-center gap-5">
-        @for (link of links; track link.label) {
-          <a
-            [href]="link.href"
-            [title]="link.title"
-            [attr.aria-label]="link.title"
-            [attr.target]="link.href.startsWith('http') ? '_blank' : null"
-            [attr.rel]="link.href.startsWith('http') ? 'noopener noreferrer' : null"
-            class="grid h-12 w-12 place-items-center rounded-full border border-line text-fg transition-colors hover:border-accent hover:text-accent"
-          >
-            <app-icon [name]="link.icon" />
-          </a>
-        }
       </div>
     </section>
   `,
