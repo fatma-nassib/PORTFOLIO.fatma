@@ -39,7 +39,7 @@ import { Icon } from '../shared/icon';
               [src]="images.hero"
               alt=""
               aria-hidden="true"
-              class="h-full w-full object-cover object-[center_15%]"
+              class="h-full w-full object-cover object-[center_15%] brightness-90"
               fetchpriority="high"
             />
           </div>

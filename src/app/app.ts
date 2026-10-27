@@ -294,13 +294,28 @@ export class App implements OnInit, OnDestroy {
       return;
     }
 
+    const url = this.assetUrl(file);
+
+    // The `download` attribute only works for same-origin URLs. If the CV lives
+    // on another origin the browser ignores it and may render the PDF instead,
+    // so fall back to opening it in a new tab.
+    if (new URL(url, window.location.origin).origin !== window.location.origin) {
+      window.open(url, '_blank', 'noopener');
+      return;
+    }
+
     const link = document.createElement('a');
-    link.href = file;
+    link.href = url;
     link.download = file.split('/').pop() ?? 'Fatma-Nassib-CV.pdf';
     link.rel = 'noopener';
     document.body.appendChild(link);
     link.click();
     link.remove();
+  }
+
+  /** Resolves a `public/` asset so it works regardless of the deployment base path. */
+  private assetUrl(path: string): string {
+    return new URL(path.replace(/^\/+/, ''), document.baseURI).href;
   }
 
   protected onCertificateOpened(name: string): void {

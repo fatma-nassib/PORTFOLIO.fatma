@@ -84,15 +84,15 @@ export const PROFILE = {
   linkedin: 'https://www.linkedin.com/in/fatma-abdallah-21665b277',
   github: 'https://github.com/2023-04-00047',
   availability: 'Open to graduate and junior engineering roles',
-  /** Relative path to the CV inside `public/`. Empty disables the download button. */
-  cvFile: '',
+  /** Relative path to the CV inside `public/` (leading slash = site root). */
+  cvFile: '/Fatma_Nassib_Official_CV.pdf',
 } as const;
 
 export const IMAGES = {
   /** Hero portrait (served from public/). */
-  hero: 'images/fatma-hero.jpg',
-  /** Small editorial thumbnail dropped inline into display type. */
-  portrait: 'images/portrait.jpg',
+  hero: '/images/fatma-hero.jpg',
+  /** About-section portrait (served from public/). */
+  portrait: '/images/fatma-about.jpg',
 } as const;
 
 export const NAV_ITEMS: readonly NavItem[] = [
@@ -130,9 +130,8 @@ export const EXPERIENCE: readonly Experience[] = [
   {
     role: 'Assistant IT & Conference Technology Lead',
     company: 'PAYCON AFRICA',
-    period: 'Apr 2026 – Present',
+    period: 'Apr 2026 – Sep 2026',
     location: 'Addis Ababa, Ethiopia · Remote',
-    current: true,
     highlights: [
       'Support conference technology operations and digital coordination for a pan-African payments platform.',
       'Assist with technical planning, participant systems and live event technology to keep sessions running to schedule.',
@@ -311,7 +310,7 @@ export const INTERESTS: readonly string[] = [
 
 export const EDUCATION: readonly Education[] = [
   {
-    qualification: 'BSc Computer Science',
+    qualification: 'Bachelor of Science in Computer Science',
     institution: 'University of Dar es Salaam, College of ICT',
     period: 'Graduated 2026',
     detail: 'Final year project: Rishfy, a service-oriented ride-sharing platform.',
@@ -339,7 +338,7 @@ export const CERTIFICATIONS: readonly Certification[] = [
 ];
 
 export const LEADERSHIP: readonly string[] = [
-  'Imbeju Smart-Elite Ambassador, CRDB Foundation · Feb 2026 – Present',
+  'Imbeju Smart-Elite Ambassador, CRDB Foundation · Feb 2026 – Sep 2026',
   'Cybersecurity Ambassador, CyberCode Africa · 2026',
 ];
 

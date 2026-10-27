@@ -25,7 +25,7 @@ import { SectionHeading } from '../shared/section-heading';
           <img
             [src]="images.portrait"
             alt="Portrait of Fatma Nassib"
-            class="h-full w-full object-cover object-position-center"
+            class="h-full w-full object-cover object-center"
           />
         </div>
         <p class="text-center text-xs uppercase tracking-[0.2em] text-muted-soft">
