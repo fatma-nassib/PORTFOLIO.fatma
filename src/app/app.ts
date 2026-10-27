@@ -50,8 +50,9 @@ import { Skills } from './sections/skills';
 
     <!-- Top bar: hamburger left, wordmark center, ghost CTA right. Floats on the photo. -->
     <header
-      class="fixed inset-x-0 top-0 z-50 text-fg transition-colors duration-300"
-      [class.text-fg!]="pastHero()"
+      class="fixed inset-x-0 top-0 z-50 transition-colors duration-300"
+      [class.text-white]="!pastHero()"
+      [class.text-fg]="pastHero()"
       [class.bg-canvas!]="pastHero()"
       [style.display]="showsTopBar() ? null : 'none'"
       (keydown.escape)="menuOpen.set(false)"
