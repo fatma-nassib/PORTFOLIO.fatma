@@ -5,6 +5,9 @@ import {
   computed,
   effect,
   ElementRef,
+  Injector,
+  inject,
+  runInInjectionContext,
   signal,
   viewChild,
 } from '@angular/core';
@@ -120,6 +123,7 @@ type ProjectFilter = ProjectCategory | 'all';
   `,
 })
 export class Projects {
+  private readonly injector = inject(Injector);
   private readonly grid = viewChild<ElementRef<HTMLElement>>('grid');
 
   constructor() {
@@ -135,7 +139,9 @@ export class Projects {
       }
       grid.classList.remove('is-staggered');
       void grid.offsetHeight;
-      afterNextRender(() => grid.classList.add('is-staggered'));
+      runInInjectionContext(this.injector, () => {
+        afterNextRender(() => grid.classList.add('is-staggered'));
+      });
     });
   }
 
