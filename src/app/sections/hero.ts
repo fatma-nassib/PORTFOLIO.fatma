@@ -51,7 +51,7 @@ import { Magnetic } from '../shared/magnetic.directive';
             the face in the open band above the panel's edge. A larger scale
             pushed the chin down into the panel and sliced the face.
           -->
-          <div class="absolute inset-0 md:inset-y-0 md:left-auto md:right-0 md:w-[68%] [transform:scale(calc(1+var(--p)*0.02))] md:[transform:translate3d(0,calc(var(--p)*4svh),0)_scale(calc(1+var(--p)*0.06))]">
+          <div class="absolute inset-0 lg:inset-y-0 lg:left-auto lg:right-0 lg:w-[68%] [transform:scale(calc(1+var(--p)*0.02))] md:[transform:translate3d(0,calc(var(--p)*4svh),0)_scale(calc(1+var(--p)*0.06))]">
             <img
               [src]="images.hero"
               alt=""
@@ -59,15 +59,11 @@ import { Magnetic } from '../shared/magnetic.directive';
               class="settle-in h-full w-full object-cover object-[center_15%] md:object-[center_28%]"
               fetchpriority="high"
             />
+            <div class="hero-scrim pointer-events-none absolute inset-0" aria-hidden="true"></div>
           </div>
 
           <div
-            class="pointer-events-none absolute inset-0 bg-black/25"
-            aria-hidden="true"
-          ></div>
-
-          <div
-            class="section-shell relative flex h-full flex-col justify-end pb-10 pt-[calc(4.5rem+2svh)] text-white md:max-w-[58%] md:justify-center md:pb-10"
+            class="section-shell relative flex h-full flex-col justify-end pb-10 pt-[calc(4.5rem+2svh)] text-white lg:max-w-[58%] lg:justify-center lg:pb-10 lg:text-fg"
             [style.opacity]="contentOpacity()"
             [style.transform]="'translate3d(0,' + -progress() * 9 + 'rem,0)'"
             [style.filter]="blurPx()"
@@ -75,14 +71,14 @@ import { Magnetic } from '../shared/magnetic.directive';
             <!-- The introduction arrives in sequence (see rise-in). -->
             <h1
               id="hero-headline"
-              class="screamer rise-in mb-4 text-white [font-size:clamp(30px,min(9vw,7svh),120px)] md:mb-6"
+              class="screamer rise-in mb-4 text-white [font-size:clamp(30px,min(9vw,7svh),120px)] md:mb-6 lg:text-fg"
               style="--enter-delay: 120ms"
             >
               {{ hero.greeting }}
             </h1>
 
             <p
-              class="rise-in mb-6 text-caption leading-snug text-white/90 md:text-body md:text-body-lg"
+              class="rise-in mb-6 text-caption leading-snug text-white/90 md:text-body md:text-body-lg lg:text-muted"
               style="--enter-delay: 260ms"
             >
               {{ hero.roles }}
@@ -91,7 +87,7 @@ import { Magnetic } from '../shared/magnetic.directive';
             <div class="flex flex-col gap-6">
               <div class="max-w-xl">
                 <p
-                  class="rise-in max-w-lg text-caption leading-snug text-white/90 md:text-body"
+                  class="rise-in max-w-lg text-caption leading-snug text-white/90 md:text-body lg:text-muted"
                   style="--enter-delay: 380ms"
                 >
                   {{ hero.bio }}

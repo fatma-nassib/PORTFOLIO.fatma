@@ -322,6 +322,28 @@
     color: var(--color-fg);
   }
 
+  .hero-scrim {
+    background: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 0.12) 0%,
+      rgb(0 0 0 / 0.2) 45%,
+      rgb(0 0 0 / 0.7) 100%
+    );
+  }
+
+  @media (width >=1024px) {
+    .hero-scrim {
+      background:
+        linear-gradient(
+          90deg,
+          var(--color-canvas) 0%,
+          color-mix(in srgb, var(--color-canvas) 80%, transparent) 26%,
+          transparent 58%
+        ),
+        linear-gradient(180deg, rgb(0 0 0 / 0.04), rgb(0 0 0 / 0.2));
+    }
+  }
+
   /*
     The panel is anchored to the section, but `main` reserves a column for the
     fixed side rail, so the panel's own rows apply the matching inset inline

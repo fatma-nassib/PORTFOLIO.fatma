@@ -235,7 +235,6 @@ export const SKILL_GROUPS: readonly SkillGroup[] = [
       { name: 'LAN Configuration and Maintenance', level: 78 },
       { name: 'IT Technician Support', level: 85 },
       { name: 'Computer Hardware Maintenance', level: 82 },
-      { name: 'Software Installation and Troubleshooting', level: 82 },
       { name: 'Cybersecurity', level: 75 },
     ],
   },
@@ -301,6 +300,16 @@ export const PROJECTS: readonly Project[] = [
     category: 'web',
     url: 'https://unisupport.rejoda.co.tz/',
     linkLabel: 'View live site',
+  },
+  {
+    title: 'Personal Portfolio',
+    subtitle: 'Portfolio website',
+    description:
+      'A responsive portfolio presenting my projects, experience, certificates, and work across software development, cybersecurity, and networking. Built with Angular, TypeScript, and Tailwind CSS, and deployed on GitHub Pages.',
+    stack: ['Angular', 'TypeScript', 'Tailwind CSS', 'GitHub Pages'],
+    category: 'web',
+    url: 'https://fatma-nassib.github.io/PORTFOLIO.fatma/',
+    linkLabel: 'View live portfolio',
   },
 ];
 

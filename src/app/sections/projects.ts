@@ -31,7 +31,7 @@ type ProjectFilter = ProjectCategory | 'all';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section id="projects" class="page-section scroll-mt-24">
-      <app-section-heading text="Projects" index="04" subtitle="Projects for commuters, farmers, and health workers." />
+      <app-section-heading text="Projects" index="04" subtitle="Selected work across software, data, and IT." />
 
       <div class="mb-8 flex flex-wrap gap-2" role="tablist" aria-label="Project categories">
         @for (filter of filters; track filter.value) {
