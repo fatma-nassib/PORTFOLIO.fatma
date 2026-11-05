@@ -131,13 +131,11 @@ export const STATS: readonly Stat[] = [
 
 export const EXPERIENCE: readonly Experience[] = [
   {
-    role: 'Casual Labour (Tester)',
-    company: 'Imagine Worldwide',
-    period: '2 Sep 2026 - 30 Oct 2026',
+    role: 'Software Tester',
+    company: 'Imagine Worldwide Tanzania',
+    period: '02 Sep 2026 - 30 Oct 2026',
     location: 'Tanzania',
-    highlights: [
-      'Performed assigned testing duties and reported findings to support product quality assurance.',
-    ],
+    highlights: ['Tested software and reported issues to support quality assurance.'],
   },
   {
     role: 'Assistant IT and Conference Technology Lead',
