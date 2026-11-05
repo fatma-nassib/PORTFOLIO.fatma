@@ -124,12 +124,21 @@ export const ABOUT_TEXT =
 
 export const STATS: readonly Stat[] = [
   { value: '2026', label: 'Graduated' },
-  { value: '05', label: 'Professional roles' },
+  { value: '06', label: 'Professional roles' },
   { value: '07', label: 'Certifications' },
   { value: '03', label: 'Shipped products' },
 ];
 
 export const EXPERIENCE: readonly Experience[] = [
+  {
+    role: 'Casual Labour (Tester)',
+    company: 'Imagine Worldwide',
+    period: '2 Sep 2026 - 30 Oct 2026',
+    location: 'Tanzania',
+    highlights: [
+      'Performed assigned testing duties and reported findings to support product quality assurance.',
+    ],
+  },
   {
     role: 'Assistant IT and Conference Technology Lead',
     company: 'PAYCON AFRICA',
